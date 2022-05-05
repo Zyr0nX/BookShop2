@@ -1,0 +1,55 @@
+﻿@model BookShop.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+@*<div class="_1ix216">
+    <button class="_1tEaLw _1KaMhP _2hu_TW">
+        <div class="_2cL_gJ">
+            <div class="_2YPltP social-white-background social-white-fb-blue-png">
+            </div>
+        </div>
+        <div class="">Facebook</div>
+    </button><button class="_1tEaLw _1KaMhP _2hu_TW">
+        <div class="_2cL_gJ">
+            <div class="_2YPltP social-white-background social-white-google-png">
+            </div>
+        </div>
+        <div class="">Google</div>
+    </button>
+</div>*@
+
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div>
+            <p>
+                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support logging in via external services.
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+            @Html.AntiForgeryToken()
+            <div class="_1ix216" id="socialLoginList">
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    <button type="submit" class="_1tEaLw _1KaMhP _2hu_TW" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" >
+                        <div class="_2cL_gJ">
+                            @if (p.AuthenticationType == "Google")
+                            {
+                                <div class="_2YPltP social-white-background social-white-google-png">
+                                </div>
+                            }
+                            else if (p.AuthenticationType == "Facebook")
+                            {
+                                <div class="_2YPltP social-white-background social-white-fb-blue-png">
+                                </div>
+                            }
+                        </div>
+                        <div class="">@p.Caption</div>
+                    </button>
+                }
+            </div>
+        }
+    }
+}

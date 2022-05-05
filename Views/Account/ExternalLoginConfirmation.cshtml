@@ -1,0 +1,68 @@
+﻿@*@model BookShop.Models.ExternalLoginConfirmationViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>Associate your @ViewBag.LoginProvider account.</h3>
+
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Association Form</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <p class="text-info">
+        You've successfully authenticated with <strong>@ViewBag.LoginProvider</strong>.
+        Please enter a user name for this site below and click the Register button to finish
+        logging in.
+    </p>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
+
+@using BookShop.Models
+@model ExternalLoginConfirmationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="Xqnqjs">
+    <div class="_3-m13F">
+        <div class="_11EqvS">Kết nối với tài khoản @ViewBag.LoginProvider của bạn</div>
+    </div>
+</div>
+<div class="_3e4zDA">
+    <div></div>
+    @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div>Bạn đã đăng ký thành công với <strong>@ViewBag.LoginProvider</strong>. Hãy nhập tên người dùng và bấm vào nút đăng ký để đăng nhập</div>
+        <div class="_3mpt9N">
+            <div class="_3mizNj">
+                @Html.TextBoxFor(m => m.Email, new { @class = "yReWDs", @type = "text", @placeholder = "Email" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="_2RHkvG"></div>
+        </div>
+        <button class="_1ruZ5a _3Nrkgj _3kANJY _1IRuK_ _2oVpc4 hh2rFL _3_offS">
+            Đăng ký
+        </button>
+    }
+</div>

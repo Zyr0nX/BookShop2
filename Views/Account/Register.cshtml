@@ -1,0 +1,55 @@
+﻿@using BookShop.Models
+@model RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout_Account.cshtml";
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="Xqnqjs">
+    <div class="_3-m13F">
+        <div class="_11EqvS">@ViewBag.Title</div>
+    </div>
+</div>
+<div class="_3e4zDA">
+    <div></div>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="_3mpt9N">
+            <div class="_3mizNj">
+                @Html.TextBoxFor(m => m.Email, new { @class = "yReWDs", @type = "text", @placeholder = "Email", @autocomplete = "email", @name = "email", @value = "" })
+            </div>
+            <div class="_2RHkvG"></div>
+            <div class="_3mizNj">
+                @Html.PasswordFor(m => m.Password, new { @class = "yReWDs", @type = "password", @placeholder = "Mật khẩu", @name = "password", @value = "" })
+            </div>
+            <div class="_2RHkvG"></div>
+            <div class="_3mizNj">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "yReWDs", @type = "password", @placeholder = "Nhập lại mật khẩu", @name = "password", @value = "" })
+            </div>
+            <div class="_2RHkvG"></div>
+        </div>
+        <button class="_1ruZ5a _3Nrkgj _3kANJY _1IRuK_ _2oVpc4 hh2rFL _3_offS">
+            Tiếp theo
+        </button>
+    }
+    <div>
+        <div class="IFLxoY">
+            <div class="_3svg61"></div><span class="_1ZEpVL">HOẶC</span>
+            <div class="_3svg61"></div>
+        </div>
+        @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+    </div>
+    <div class="_2KbZSJ">
+        <div class="R49cvp">
+            Bằng việc đăng kí, bạn đã đồng ý với
+            Shopee về <a href="https://shopee.vn/legaldoc/termsOfService/?__classic__=1"
+                         class="_3LmzHH" target="_blank"
+                         rel="noopener noreferrer">Điều khoản dịch vụ</a>
+            &amp; <a href="https://shopee.vn/legaldoc/privacy/?__classic__=1"
+                     class="_3LmzHH" target="_blank"
+                     rel="noopener noreferrer">Chính sách bảo mật</a>
+        </div>
+    </div>
+</div>
