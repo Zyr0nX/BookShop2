@@ -8,8 +8,9 @@ namespace BookShop.Models
     {
         public Book()
         {
-            DetailOrder = new HashSet<DetailOrder>();
-            CategoryBook = new HashSet<CategoryBook>();
+            DetailOrders = new HashSet<DetailOrder>();
+            Authors = new HashSet<Author>();
+            Categories = new HashSet<Category>();
         }
 
         public int Id { get; set; }
@@ -28,13 +29,13 @@ namespace BookShop.Models
         [Display(Name = "Giá tiền")]
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = ("{0} phải lớn hơn {1}"))]
-        public int? Price { get; set; }
+        public int Price { get; set; }
 
 
         [Display(Name = "Số lượng")]
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = ("{0} phải lớn hơn {1}"))]
-        public int? Amount { get; set; }
+        public int Amount { get; set; }
 
 
         [StringLength(500)]
@@ -48,21 +49,17 @@ namespace BookShop.Models
 
         [Display(Name = "Nhà xuất bản")]
         [Required]
-        public int? IdPublisher { get; set; }
+        public int IdPublisher { get; set; }
         [ForeignKey("IdPublisher")]
         public virtual Publisher Publisher { get; set; }
 
-        public virtual ICollection<CategoryBook> CategoryBook { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetailOrder> DetailOrders { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Author> Authors { get; set; }
 
-
-        [Display(Name = "Tác giả")]
-        [Required]
-        public int? IdAuthor { get; set; }
-        [ForeignKey("IdAuthor")]
-
-        public virtual Author Author { get; set; }
-
-        public virtual ICollection<DetailOrder> DetailOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

@@ -12,7 +12,7 @@
     {
         public Publisher()
         {
-            Book = new HashSet<Book>();
+            Books = new HashSet<Book>();
         }
 
         public int Id { get; set; }
@@ -31,6 +31,6 @@
 
         public string Website { get; set; }
 
-        public virtual ICollection<Book> Book { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

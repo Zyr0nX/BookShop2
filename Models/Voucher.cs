@@ -12,7 +12,7 @@
     {
         public Voucher()
         {
-            Order = new HashSet<Order>();
+            Orders = new HashSet<Order>();
         }
 
 
@@ -29,9 +29,6 @@
         [Required(ErrorMessage = "Vui lòng nhập phần trăm giảm")]
         [Display(Name = "Phần trăm giảm")]
         [Range(1,100,ErrorMessage = "Vui lòng nhập giá trị từ 1 - 100")]
-
-
-
         public int Discount { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập ngày bắt đầu")]
@@ -39,13 +36,13 @@
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}",ApplyFormatInEditMode = true)]
 
 
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập ngày kết thúc")]
         [Display(Name = "Ngày kết thúc")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

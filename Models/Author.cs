@@ -8,7 +8,7 @@ namespace BookShop.Models
     {
         public Author()
         {
-            Book = new HashSet<Book>();
+            Books = new HashSet<Book>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace BookShop.Models
         [Remote("IsExist", "Author", ErrorMessage = "{0} đã tồn tại")]
         public string Name { get; set; }
 
-        public virtual ICollection<Book> Book { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

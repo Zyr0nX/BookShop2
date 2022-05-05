@@ -176,9 +176,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205050246390_init.cs" />
-    <Compile Include="Migrations\202205050246390_init.designer.cs">
-      <DependentUpon>202205050246390_init.cs</DependentUpon>
+    <Compile Include="Migrations\202205050846315_init.cs" />
+    <Compile Include="Migrations\202205050846315_init.designer.cs">
+      <DependentUpon>202205050846315_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -186,13 +186,11 @@
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryBook.cs" />
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DetailOrder.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Information.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\Voucher.cs" />
@@ -4285,8 +4283,8 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205050246390_init.resx">
-      <DependentUpon>202205050246390_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202205050846315_init.resx">
+      <DependentUpon>202205050846315_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

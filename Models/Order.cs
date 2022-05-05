@@ -11,7 +11,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            DetailOrder = new HashSet<DetailOrder>();
+            DetailOrders = new HashSet<DetailOrder>();
         }
 
         public int Id { get; set; }
@@ -35,30 +35,22 @@
         public string PaymentMethod { get; set; }
 
         public int? IdVoucher { get; set; }
-        [ForeignKey("IdVoucher")]
-        public virtual Voucher Voucher { get; set; }
 
-        public int? IdState { get; set; }
-        [ForeignKey("IdState")]
-        public virtual State State { get; set; }
+        public int IdState { get; set; }
 
-        public int? IdCustomer { get; set; }
-        [ForeignKey("IdCustomer")]
-        public virtual Customer Customer { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string IdCustomer { get; set; }
 
-        public int? IdInformation { get; set; }
-        [ForeignKey("IdInformation")]
-        public virtual Information Information { get; set; }
+        public int IdInformation { get; set; }
 
-
+        public virtual ApplicationUser User { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetailOrder> DetailOrder { get; set; }
+        public virtual ICollection<DetailOrder> DetailOrders { get; set; }
 
-        
-
-        
-
-        
+        public virtual Information Information { get; set; }
+        public virtual State State { get; set; }
+        public virtual Voucher Voucher { get; set; }
     }
 }

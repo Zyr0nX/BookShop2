@@ -12,7 +12,7 @@
     {
         public Category()
         {
-            CategoryBook = new HashSet<CategoryBook>();
+            Books = new HashSet<Book>();
         }
 
         [Key]
@@ -25,6 +25,6 @@
         [Remote("IsExist", "Category", ErrorMessage = "{0} đã tồn tại")]
         public string Name { get; set; }
 
-        public virtual ICollection<CategoryBook> CategoryBook { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }
