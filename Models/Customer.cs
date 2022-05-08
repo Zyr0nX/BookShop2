@@ -9,8 +9,8 @@
     {
         public Customer()
         {
-            Infomation = new HashSet<Information>();
-            Order = new HashSet<Order>();
+            Infomations = new HashSet<Information>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -40,8 +40,8 @@
         [Display(Name = "Giới tính")]
         public string Gender { get; set; }
 
-        public virtual ICollection<Information> Infomation { get; set; }
+        public virtual ICollection<Information> Infomations { get; set; }
 
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

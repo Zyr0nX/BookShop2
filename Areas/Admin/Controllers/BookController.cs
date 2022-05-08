@@ -1,6 +1,8 @@
-﻿using BookShop.Models;
+﻿using BookShop.Areas.Admin.ViewModels;
+using BookShop.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -24,64 +26,41 @@ namespace BookShop.Areas.Admin.Controllers
 
 
 
-        //public ActionResult Index(string sb = null, int? sa = null, int? sp = null, int? sc = null, int? mip = null, int? map = null)
-        //{
-        //    ViewBag.Authors = _context.Authors.ToList();
-        //    ViewBag.Categories = _context.Categories.ToList();
-        //    ViewBag.Publishers = _context.Publishers.ToList();
+        public ActionResult Index()
+        {
+            var bookViewModels = new List<BookViewModel>();
 
-        //    IQueryable<Book> bookQuery = _context.Books
-        //        .Include("Author")
-        //        .Include("Category")
-        //        .Include("Publisher");
+            foreach (var item in _context.Books.ToList())
+            {
+                var book = new BookViewModel();
+                book.books = item;
 
-        //    if (!String.IsNullOrWhiteSpace(sb))
-        //        bookQuery = bookQuery.Where(c => c.Name.Contains(sb));
+                var categories = new List<Category>();
+                foreach (var item1 in item.CategoryBooks)
+                {
+                    categories.Add(_context.Categories.SingleOrDefault(x => x.Id == item1.IdCategory));
+                }
+                book.categories = categories;
 
-        //    if (sa != null)
-        //        bookQuery = bookQuery.Where(c => c.IdAuthor == sa);
+                var authors = new List<Author>();
+                foreach (var item2 in item.AuthorBooks)
+                {
+                    authors.Add(_context.Authors.SingleOrDefault(x => x.Id == item2.IdAuthor));
+                }
+                book.authors = authors;
 
-        //    if (sp != null)
-        //        bookQuery = bookQuery.Where(c => c.IdPublisher == sp);
-
-        //    if (sc != null)
-        //        bookQuery = bookQuery.Where(c => c.IdCategory == sc);
-
-        //    if (mip != null)
-        //        bookQuery = bookQuery.Where(c => c.Price >= mip);
-
-        //    if (map != null)
-        //        bookQuery = bookQuery.Where(c => c.Price <= map);
-
-        //    var book = bookQuery.ToList();
-
-        //    return View(book);
-            //ViewBag.Authors = _context.Authors.ToList();
-            //ViewBag.Categories = _context.Categories.ToList();
-            //ViewBag.Publishers = _context.Publishers.ToList();
-            //var book = _context.Books
-            //    .Where(b => b.Name.Contains(sb))
-            //    .Where(b => b.IdAuthor.Equals(sa))
-            //    .Where(b => b.IdPublisher.Equals(sp))
-            //    .Where(b => b.IdCategory.Equals(sc))
-            //    .Where(b => b.Price >= mip)
-            //    .Where(b => b.Price <= map)
-            //    .ToList();
-            //return View(book);    
-
-        //public ActionResult Create()
-        //{
-        //    var author = _context.Authors.ToList();
-        //    var category = _context.Categories.ToList();
-        //    var publisher = _context.Publishers.ToList();
-        //    var viewModel = new BookViewModel
-        //    {
-        //        Authors = author,
-        //        Categories = category,
-        //        Publishers = publisher
-        //    };
-        //    return View("BookForm", viewModel);
-        //}
+                bookViewModels.Add(book);
+            }
+            return View(bookViewModels);
+        }
+        public ActionResult Create()
+        {
+            var author = _context.Authors.ToList();
+            var category = _context.Categories.ToList();
+            ViewBag.publisher = _context.Publishers.ToList();
+            
+            return View();
+        }
 
         //public ActionResult Edit(int id)
         //{
@@ -113,51 +92,75 @@ namespace BookShop.Areas.Admin.Controllers
         //    }
         //}
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Save(Book book, HttpPostedFileBase photo)
-        //{
-        //    if (book.Id == 0)
-        //    {
-        //        if (photo != null && photo.ContentLength > 0)
-        //        {
-        //            var path = Path.Combine(Server.MapPath("~/Areas/Admin/Data/BookImage/"),
-        //                                    System.IO.Path.GetFileName(photo.FileName));
-        //            photo.SaveAs(path);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Book book, HttpPostedFileBase photo)
+        {
+            if (book.Id == 0)
+            {
+                if (photo != null && photo.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Areas/Admin/Data/BookImage/"),
+                                            System.IO.Path.GetFileName(photo.FileName));
+                    photo.SaveAs(path);
 
-        //            book.Photo = photo.FileName;
-        //        }
-        //        else
-        //            book.Photo = "150x200.png";
-        //        _context.Books.Add(book);
-        //        _context.SaveChanges();
-        //        return Redirect("~/Admin/Book");
-        //    }
-        //    else
-        //    {
-        //        var bookInDb = _context.Books.Single(c => c.Id == book.Id);
-        //        bookInDb.Name = book.Name;
-        //        bookInDb.Discount = book.Discount;
-        //        bookInDb.Price = book.Price;
-        //        bookInDb.Amount = book.Amount;
-        //        bookInDb.Description = book.Description;
-        //        bookInDb.IdAuthor = book.IdAuthor;
-        //        bookInDb.IdCategory = book.IdCategory;
-        //        bookInDb.IdPublisher = book.IdPublisher;
-        //        bookInDb.Price = book.Price;
-        //        if (photo != null && photo.ContentLength > 0)
-        //        {
-        //            var path = Path.Combine(Server.MapPath("~/Areas/Admin/Data/BookImage/"),
-        //                                    System.IO.Path.GetFileName(photo.FileName));
-        //            photo.SaveAs(path);
+                    book.Photo = photo.FileName;
+                }
+                else
+                    book.Photo = "150x200.png";
+                _context.Books.Add(book);
+                _context.SaveChanges();
+                return Redirect("~/Admin/Book");
+            }
+            else
+            {
+                var bookInDb = _context.Books.Single(c => c.Id == book.Id);
+                bookInDb.Name = book.Name;
+                bookInDb.Discount = book.Discount;
+                bookInDb.Price = book.Price;
+                bookInDb.Amount = book.Amount;
+                bookInDb.Description = book.Description;
+                bookInDb.AuthorBooks = book.AuthorBooks;
+                bookInDb.CategoryBooks = book.CategoryBooks;
+                bookInDb.IdPublisher = book.IdPublisher;
+                bookInDb.Price = book.Price;
+                if (photo != null && photo.ContentLength > 0)
+                {
+                    var path = Path.Combine(Server.MapPath("~/Areas/Admin/Data/BookImage/"),
+                                            System.IO.Path.GetFileName(photo.FileName));
+                    photo.SaveAs(path);
 
-        //            bookInDb.Photo = photo.FileName;
-        //        }
-        //        _context.SaveChanges();
-        //        return Redirect("~/Admin/Book");
-        //    }
+                    bookInDb.Photo = photo.FileName;
+                }
+                _context.SaveChanges();
+                return Redirect("~/Admin/Book");
+            }
 
 
-        //}
+        }
+
+        [ChildActionOnly]
+        public ActionResult ListBoxCategory(int? IdBook = null)
+        {
+            var category = new CategoryListBoxViewModel();
+            category.categories = _context.Categories.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Name }).ToList();
+            if (IdBook != null)
+            {
+                category.selectedcategory = _context.CategoryBooks.Where(x => x.IdBook == IdBook).Select(x => x.IdCategory).ToArray();
+            }
+            return PartialView(category);
+        }
+
+        [ChildActionOnly]
+        public ActionResult ListBoxAuthor(int? IdBook = null)
+        {
+            var author = new AuthorListBoxViewModel();
+            author.authors = _context.Authors.Select(a => new SelectListItem() { Value = a.Id.ToString(), Text = a.Name }).ToList();
+            if (IdBook != null)
+            {
+                author.selectedauthor = _context.AuthorBooks.Where(x => x.IdBook == IdBook).Select(x => x.IdAuthor).ToArray();
+            }
+            return PartialView(author);
+        }
     }
 }

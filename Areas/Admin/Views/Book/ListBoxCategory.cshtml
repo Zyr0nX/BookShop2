@@ -1,0 +1,11 @@
+﻿@model BookShop.Areas.Admin.ViewModels.CategoryListBoxViewModel
+
+<div class="form-group">
+    @Html.LabelFor(model => model.selectedcategory, htmlAttributes: new { @class = "control-label" })
+    <a class="btn btn-primary" href="~/Admin/Employee/Create">
+        <i class="fas fa-plus"></i>
+    </a>
+    <div class="col-md-10">
+        @Html.ListBoxFor(model => model.selectedcategory, Model.categories, new { @class = "form-control selectpicker", data_live_search = "true" })
+    </div>
+</div>

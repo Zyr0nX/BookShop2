@@ -1,4 +1,4 @@
-namespace BookShop.Models
+﻿namespace BookShop.Models
 {
     using System;
     using System.Collections.Generic;
@@ -6,24 +6,19 @@ namespace BookShop.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("DetailOrder")]
-    public partial class DetailOrder
+    [Table("AuthorBook")]
+    public partial class AuthorBook
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IdOrder { get; set; }
-
-        
+        public int IdAuthor { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdBook { get; set; }
-        public int? Amount { get; set; }
-        public int? Price { get; set; }
-        public int? TotalPrice { get; set; }
         public virtual Book Book { get; set; }
-        public virtual Order Order { get; set; }
+        public virtual Author Author { get; set; }
     }
 }

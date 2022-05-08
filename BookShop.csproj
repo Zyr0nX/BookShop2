@@ -169,20 +169,27 @@
     <Compile Include="Areas\Admin\Controllers\BookController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\AuthorListBoxViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\BookViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CategoryListBoxViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205050246390_init.cs" />
-    <Compile Include="Migrations\202205050246390_init.designer.cs">
-      <DependentUpon>202205050246390_init.cs</DependentUpon>
+    <Compile Include="Migrations\202205071119566_init.cs" />
+    <Compile Include="Migrations\202205071119566_init.designer.cs">
+      <DependentUpon>202205071119566_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205071456305_init1.cs" />
+    <Compile Include="Migrations\202205071456305_init1.designer.cs">
+      <DependentUpon>202205071456305_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\AuthorBook.cs" />
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Category.cs" />
@@ -2106,23 +2113,6 @@
     <Content Include="Areas\Admin\Data\BannerImage\unnamed.jpg" />
     <Content Include="Areas\Admin\Data\BannerImage\Untitled.png" />
     <Content Include="Areas\Admin\Data\BookImage\150x200.png" />
-    <Content Include="Areas\Admin\Data\BookImage\1533663558-181-fb_img_1532939781964-1533663370-width960height840.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\2576b3730782b9.img.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\338581e47d0a0d3dedbbecc49185e498.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\6820f2e70b9018f552678845a8615a03.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\82081521_2314227482203228_5388157603794649088_n.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\90150536_2545012522382214_3280460612974411776_n.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\affd1287ac61d9204a6afb5a8083aac4.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\Doraemon1.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\doremon-2.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\ham-3-1572663406-315-width600height400.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\Lupin.png" />
-    <Content Include="Areas\Admin\Data\BookImage\Mon-suon-xao-chua-ngot.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\NguyễnNhưQuang_18150106_CNTT17.png" />
-    <Content Include="Areas\Admin\Data\BookImage\suon-xao-chua-ngot-voi-ca-chua-ngon-kho-cuong-3.gif" />
-    <Content Include="Areas\Admin\Data\BookImage\suon-xao-chua-ngot.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\tải xuống.jpg" />
-    <Content Include="Areas\Admin\Data\BookImage\unnamed.jpg" />
     <Content Include="Areas\Admin\Data\dist\css\adminlte.css" />
     <Content Include="Areas\Admin\Data\dist\css\adminlte.min.css" />
     <Content Include="Areas\Admin\Data\dist\css\alt\adminlte.components.css" />
@@ -4207,6 +4197,9 @@
     <Content Include="Areas\Admin\Views\Author\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Author\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Book\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\ListBoxCategory.cshtml" />
+    <Content Include="Areas\Admin\Views\Book\ListBoxAuthor.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4255,6 +4248,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\NewFolder1\" />
     <Folder Include="Areas\Admin\Views\Login\" />
   </ItemGroup>
   <ItemGroup>
@@ -4285,8 +4279,11 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205050246390_init.resx">
-      <DependentUpon>202205050246390_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202205071119566_init.resx">
+      <DependentUpon>202205071119566_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205071456305_init1.resx">
+      <DependentUpon>202205071456305_init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -11,7 +11,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            DetailOrder = new HashSet<DetailOrder>();
+            DetailOrders = new HashSet<DetailOrder>();
         }
 
         public int Id { get; set; }
@@ -53,7 +53,7 @@
 
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetailOrder> DetailOrder { get; set; }
+        public virtual ICollection<DetailOrder> DetailOrders { get; set; }
 
         
 

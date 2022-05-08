@@ -11,7 +11,7 @@ namespace BookShop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Information()
         {
-            Order = new HashSet<Order>();
+            Orders = new HashSet<Order>();
         }
 
         public int Id { get; set; }
@@ -31,8 +31,7 @@ namespace BookShop.Models
         [ForeignKey("IdCustomer")]
         public virtual Customer Customer { get; set; }
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

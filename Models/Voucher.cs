@@ -12,7 +12,7 @@
     {
         public Voucher()
         {
-            Order = new HashSet<Order>();
+            Orders = new HashSet<Order>();
         }
 
 
@@ -46,6 +46,6 @@
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime? EndDate { get; set; }
 
-        public virtual ICollection<Order> Order { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

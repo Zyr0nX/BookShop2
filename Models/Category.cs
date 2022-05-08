@@ -1,4 +1,4 @@
-﻿    namespace BookShop.Models
+﻿namespace BookShop.Models
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +12,7 @@
     {
         public Category()
         {
-            CategoryBook = new HashSet<CategoryBook>();
+            CategoryBooks = new HashSet<CategoryBook>();
         }
 
         [Key]
@@ -25,6 +25,7 @@
         [Remote("IsExist", "Category", ErrorMessage = "{0} đã tồn tại")]
         public string Name { get; set; }
 
-        public virtual ICollection<CategoryBook> CategoryBook { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoryBook> CategoryBooks { get; set; }
     }
 }
