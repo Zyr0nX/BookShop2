@@ -20,9 +20,9 @@ namespace BookShop.Models
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int IdBook { get; set; }
-        public int? Amount { get; set; }
-        public int? Price { get; set; }
-        public int? TotalPrice { get; set; }
+        public int Amount { get; set; }
+        public int Price { get; set; }
+        public int TotalPrice { get; set; }
         public virtual Book Book { get; set; }
         public virtual Order Order { get; set; }
     }

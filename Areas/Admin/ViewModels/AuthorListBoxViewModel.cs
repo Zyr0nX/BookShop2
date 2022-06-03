@@ -12,7 +12,7 @@
     {
         public List<SelectListItem> authors { set; get; }
         public int[] selectedauthor { set; get; }
-        [Display(Name = "")]
+        [Display(Name = "Tác giả")]
         public string authorName { set; get; }
     }
 }

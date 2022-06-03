@@ -42,7 +42,7 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="input-group mb-3">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
 
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="input-group mb-3">

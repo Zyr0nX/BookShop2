@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+@model BookShop.Models.LoginViewModels
+
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html lang="vi">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <link href="~/Content/login.css"
+          rel="stylesheet">
+</head>
+
+<body>
+    <div id="main">
+        <div>
+            <div class="_1229NB">
+                <nav class="_10Vl49">
+                    <div class="_1ilxso">
+                        <div class="_1wjIrC">
+                            <div class="_2oP3Vy">Đăng nhập</div>
+                        </div>
+                    </div>
+                </nav>
+                <div style="background-color: rgb(238, 77, 45);">
+                    <div class="_2XRSuf _2tK8Te"
+                         style="background-image: url(&quot;https://cf.shopee.vn/file/7666e5c7427f98a8bd1102ffea426afd&quot;); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+                        @using (Html.BeginForm("Login", "Customers", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="_3KEKx7 _34gSQ- _2kpMlA">
+                                <div class="Xqnqjs">
+                                    <div class="_3-m13F">
+                                        <div class="_11EqvS">Đăng nhập</div>
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary(true, "", new { @style = "color:red;font-weight:bold" })
+                                <div class="_3e4zDA">
+                                    <div></div>
+                                    <div class="_3nZHpB">
+                                        <div class="_3mizNj">
+                                            @Html.TextBoxFor(model => model.Username, new { @class = "yReWDs", @placeholder = "Email/Số điện thoại/Tên đăng nhập" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Username, "", new { @style = "color:red;font-weight:bold" })
+                                        <div class="_2RHkvG"></div>
+                                    </div>
+                                    <div class="_35M4-Y">
+                                        <div class="_3mizNj">
+                                            @Html.TextBoxFor(model => model.Password, new { @class = "yReWDs", @placeholder = "Mật khẩu", @type = "password" })
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @style = "color:red;font-weight:bold" })
+                                        <div class="_2RHkvG"></div>
+                                    </div>
+                                    <button class="_1ruZ5a _3Nrkgj _3kANJY _1IRuK_ hh2rFL _3_offS">
+                                        Đăng nhập
+                                    </button>
+                                </div>
+                                <div class="_3AiUtd">
+                                    <div class="_2O9TWB">
+                                        <span class="yjBjsT">
+                                            Bạn chưa có tài khoản?
+                                        </span><a class="_25Fkvp"
+                                                  href="/Customers/Register">
+                                            Đăng
+                                            ký
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

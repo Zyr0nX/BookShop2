@@ -1,0 +1,48 @@
+﻿@model IEnumerable<BookShop.Models.Banner>
+
+<div class="hero__banner-carousel js-banner-slider">
+    <!--  -->
+    @foreach (var item in Model)
+    {
+        if (item.State == "dynamic")
+        {
+            <a href="@item.RefLink"
+               class="hero__banner-carousel-item">
+                <figure class="figure">
+                    <img src="~/Areas/Admin/Data/BannerImage/@item.Photo"
+                         alt="">
+                </figure>
+            </a>
+        }
+    }
+</div>
+
+<div class="hero__banner-fixed">
+    @foreach (var item in Model)
+    {
+        if (item.State == "static" && item.Equals(Model.Last()))
+        {
+            <div class="hero__banner-fixed-secondary">
+                <a href="@item.RefLink"
+                   class="link">
+                    <figure class="figure">
+                        <img src="~/Areas/Admin/Data/BannerImage/@item.Photo"
+                             alt="">
+                    </figure>
+                </a>
+            </div>
+        }
+        else if (item.State == "static")
+        {
+            <div class="hero__banner-fixed-primary">
+                <a href="@item.RefLink"
+                   class="link">
+                    <figure class="figure">
+                        <img src="~/Areas/Admin/Data/BannerImage/@item.Photo"
+                             alt="">
+                    </figure>
+                </a>
+            </div>
+        }
+    }
+</div>

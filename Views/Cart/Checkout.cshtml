@@ -1,0 +1,171 @@
+﻿@model BookShop.Models.CheckoutViewModels
+
+@{
+    if (Session["USER_SESSION"] == null)
+    {
+        Response.Redirect("/Customers/Login");
+    }
+}
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    int? totalPrice = 0;
+    int? totalAmount = 0;
+}
+
+@using System.Globalization
+
+<div role="main" class="page-checkout js-page-checkout">
+    <div class="container">
+        <div class="checkout-address-selection js-checkout-address change">
+            <div class="tickid-border-delivery"></div>
+            <div class="checkout-address-selection__container">
+                <div class="checkout-address-selection__section-header">
+                    <div class="checkout-address-selection__section-header-text">
+                        <svg class="tickid-svg-icon icon-location-marker" height="16"
+                             viewBox="0 0 12 16" width="12">
+                            <path d="M6 3.2c1.506 0 2.727 1.195 2.727 2.667 0 1.473-1.22 2.666-2.727 2.666S3.273 7.34 3.273 5.867C3.273 4.395 4.493 3.2 6 3.2zM0 6c0-3.315 2.686-6 6-6s6 2.685 6 6c0 2.498-1.964 5.742-6 9.933C1.613 11.743 0 8.498 0 6z"
+                                  fill-rule="evenodd"></path>
+                        </svg> Địa chỉ nhận hàng
+                    </div>
+                    <div class="checkout-address-selection__change-btn js-change-address">
+                        Thay
+                        đổi
+                    </div>
+                </div>
+                <div class="checkout-address-selection__list js-list-address" id="list-address">
+                        <div class="checkout-address-selection__item js-address-item active"
+                             data-address="11576">
+                            <div class="checkout-address-selection__selected-address-summary">
+
+                                <div class="checkout-address-row">
+                                        <div class="checkout-address-row__user-detail">
+                                            <span class="checkout-address-row__user-name">@Model.Information.Name</span>
+                                            <span class="checkout-address-row__user-phone">@Model.Information.Sdt</span>
+                                        </div>
+                                        <div class="checkout-address-row__address-summary">@Model.Information.Address</div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <div class="checkout-address-selection__buttons">
+                    <button class="tickid-button-solid btn-solid-default js-finish-address">
+                        <span class="cart-page-footer__checkout-text">Trở lại</span>
+                    </button>
+                    <button class="tickid-button-solid btn-solid-default js-modal-open"
+                            target="modal-form-address">
+                        <span class="cart-page-footer__checkout-text">
+                            Thêm địa chỉ
+                            mới
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="checkout-product-ordered-list">
+            <div class="checkout-product-ordered-list__header-block">
+                <div class="checkout-product-ordered-list__headers">
+                    <div class="checkout-product-ordered-list__header checkout-product-ordered-list__header--product">
+                        <div class="checkout-product-ordered-list__title">Sản phẩm</div>
+                    </div>
+                    <div class="checkout-product-ordered-list__header hidden-sm">Đơn giá</div>
+                    <div class="checkout-product-ordered-list__header hidden-sm">Số lượng</div>
+                    <div class="checkout-product-ordered-list__header checkout-product-ordered-list__header--subtotal  hidden-sm">
+                        Tổng số tiền:
+                    </div>
+                </div>
+            </div>
+            <div class="checkout-product-ordered-list__content">
+                <div class="checkout-shop-order-group">
+                    <div class="checkout-shop-order-group__orders">
+                        <div class="checkout-product-ordered-list-item">
+                            <div class="checkout-product-ordered-list-item__items">
+                                @foreach (var item in Model.CartViewModels)
+                                {
+                                    <div class="checkout-product-ordered-list-item__item checkout-product-ordered-list-item__item--non-add-on">
+                                        <div class="checkout-product-ordered-list-item__header checkout-product-ordered-list-item__header--product">
+                                            <img class="checkout-product-ordered-list-item__product-image"
+                                                 src="~/Areas/Admin/Data/BookImage/@item.Book.Photo"
+                                                 width="40" height="40">
+                                            <span class="checkout-product-ordered-list-item__product-info">
+                                                <span class="checkout-product-ordered-list-item__product-name">
+                                                    @item.Book.Name
+                                                </span>
+                                            </span>
+                                        </div>
+                                        <div class="checkout-product-ordered-list-item__header checkout-product-ordered-list-item__header--unit-price">
+                                            @(Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                        </div>
+                                        <div class="checkout-product-ordered-list-item__header checkout-product-ordered-list-item_header--amount">
+                                            @item.amount
+                                        </div>
+                                        <div class="checkout-product-ordered-list-item__header  checkout-product-ordered-list-item__header--subtotal">
+                                            @((Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100)*item.amount).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                        </div>
+                                    </div>
+                                    totalPrice += (item.Book.Price * (100 - item.Book.Discount) / 100) * item.amount;
+                                    totalAmount += item.amount;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="_1pkbuI">
+                        <div class="_1wd2xT">Tổng số tiền: (@(totalAmount) Sản phẩm):</div>
+                        <div class="ZwtlWT">@((Convert.ToDouble(totalPrice).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN"))))</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-checkout__payment-order-wrapper">
+            <div class="checkout-payment-method-view js-checkout-payment">
+                <div class="checkout-payment-method-view__current">
+                    <div class="checkout-payment-method-view__current-title">
+                        Phương thức thanh
+                        toán
+                    </div>
+                    <div class="checkout-payment-setting__payment-methods-tab">
+                        <span>
+                            <button class="product-variation js-product-variation product-variation--selected"
+                                    data-target="payment_method_1" data-type="1">
+                                Thanh toán
+                                COD
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="_1p-9Tx checkout-payment-setting__payment-method-options js-payment-method-content active"
+                     id="payment_method_1">
+                    <div class="checkout-payment_title">Thanh toán COD</div>
+                    <div class="_3bBHBJ checkout-payment_content" style="white-space:pre-wrap;">
+                        Khách thanh toán sau khi nhận hàng
+                    </div>
+                </div>
+            </div>
+            <div class="page-checkout__payment-order-footer">
+                <div class="flex">
+                    <div class="_2X6jGK label">Tổng thanh toán</div>
+                    <div class="_2X6jGK bYNx7P value js-cart-page-footer-total-price">
+                        @((Convert.ToDouble(totalPrice).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN"))))
+                    </div>
+                </div>
+
+                <div class="_1nqViI _3Rq9ya">
+                    <a href="https://ohuivina.com/cart"
+                       class="stardust-button stardust-button--large _1rgnQx mr-20">Trở lại</a>
+                    <a class="stardust-button stardust-button--primary stardust-button--large _1rgnQx js-btn-cart-checkout" href="/Cart/Order/?idInformation=@Model.Information.Id">
+                        Đặt
+                        hàng
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ Html.RenderAction("RenderInformation", "Cart"); }

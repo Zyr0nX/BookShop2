@@ -33,6 +33,11 @@ namespace BookShop.Areas.Admin.Controllers
             return View();
         }
 
+        public JsonResult IsExist(string Name)
+        {
+            return Json(!_context.Publishers.Any(x => x.Name == Name), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Edit(int id)
         {
             var publisher = _context.Publishers.SingleOrDefault(c => c.Id == id);

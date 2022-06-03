@@ -1,0 +1,170 @@
+﻿@model BookShop.Models.Banner
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm Banner</h1>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        @using (Html.BeginForm("Save", "Banner", FormMethod.Post, new { id = "form-banner", style = "display: flex; width: 100%;", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="col-5">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col custom-file" style="width:97%; margin-left:8px">
+                                        @Html.EditorFor(model => model.Photo, new
+                                        {
+                                            htmlAttributes = new
+                                            {
+                                                @class = "custom-file-input",
+                                                id = "exampleInputFile",
+                                                @type = "file",
+                                                accept = "image/*",
+                                                required = "",
+                                                data_val_required = "Vui lòng upload ảnh."
+                                            }
+                                        })
+
+                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+
+                                        @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col">
+                                        <select class="form-control" id="select-state" name="state">
+                                            <option value="None">None</option>
+                                            <option value="Dynamic">Dynamic</option>
+                                            <option value="Static">Static</option>
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.RefLink, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.RefLink, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.RefLink, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Stt, htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col">
+                                        @Html.EditorFor(model => model.Stt, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Stt, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                        <a href="~/Admin/Banner" class="btn btn-warning">Huỷ</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-5 align-self-center offset-md-2">
+
+                                <img class="" id="blah" src="https://via.placeholder.com/400x350" alt="placeholder" style="width:400px; height:350px" />
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    bsCustomFileInput.init();
+
+    exampleInputFile.onchange = evt => {
+        const [file] = exampleInputFile.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
+    }
+    $(document).ready(function () {
+
+        var select = $('#select-state').val();
+        $('#Stt').prop('disabled', true);
+        $('#select-state').on('change', function () {
+            select = $('#select-state').val();
+            $("#Stt").rules("remove", "range");
+            $("#Stt").rules("remove", "required");
+
+            if (select !== "None")
+                $('#Stt').prop('disabled', false);
+            else {
+                $('#Stt').trigger('focus');
+                $('#RefLink').trigger('focus');
+                $('#Stt').prop('disabled', true);
+                $('#Stt').val('');
+            }
+
+            if (select === "Dynamic") {
+                if (!@ViewBag.Max) {
+                    $('#Stt').val('1');
+                    $('#Stt').rules('add', {
+                        range: [1, 1],
+                        required: true,
+                        messages: {
+                            range: jQuery.validator.format("STT phải có giá trị là {0} (Banner đầu tiên)"),
+                            required: "Vui lòng nhập STT"
+
+                        }
+                    });
+
+                }
+                else {
+                    $('#Stt').rules('add', {
+                        range: [1, @ViewBag.Max +1],
+                        required: true,
+                        messages: {
+                            range: jQuery.validator.format("STT có giá trị từ {0} (đầu tiên) đến {1} (cuối cùng)"),
+                            required: "Vui lòng nhập STT"
+                        }
+                    });
+
+                }
+            }
+
+            if (select === "Static") {
+                $('#Stt').rules('add', {
+                    range: [1, 2],
+                    required: true,
+                    messages: {
+                        range: jQuery.validator.format("STT có giá trị từ {0} (trên) đến {1} (dưới)"),
+                        required: "Vui lòng nhập STT"
+                    }
+                });
+            }
+        });
+    })
+
+</script>

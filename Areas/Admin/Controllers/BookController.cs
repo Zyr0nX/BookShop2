@@ -53,13 +53,21 @@ namespace BookShop.Areas.Admin.Controllers
             }
             return View(bookViewModels);
         }
+
         public ActionResult Create()
         {
-            var author = _context.Authors.ToList();
-            var category = _context.Categories.ToList();
             ViewBag.publisher = _context.Publishers.ToList();
             
             return View();
+        }
+
+        public ActionResult Edit(int id)
+        {
+            ViewBag.publisher = _context.Publishers.ToList();
+            var book = _context.Books.SingleOrDefault(c => c.Id == id);
+            if (book == null)
+                return HttpNotFound();
+            return View(book);
         }
 
         //public ActionResult Edit(int id)
@@ -94,9 +102,9 @@ namespace BookShop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Book book, HttpPostedFileBase photo)
+        public ActionResult Save(BookViewModel book, HttpPostedFileBase photo, int[] selectedauthor = null, int[] selectedcategory = null)
         {
-            if (book.Id == 0)
+            if (book.books.Id == 0)
             {
                 if (photo != null && photo.ContentLength > 0)
                 {
@@ -104,26 +112,38 @@ namespace BookShop.Areas.Admin.Controllers
                                             System.IO.Path.GetFileName(photo.FileName));
                     photo.SaveAs(path);
 
-                    book.Photo = photo.FileName;
+                    book.books.Photo = photo.FileName;
                 }
                 else
-                    book.Photo = "150x200.png";
-                _context.Books.Add(book);
-                _context.SaveChanges();
-                return Redirect("~/Admin/Book");
+                    book.books.Photo = "150x200.png";
+                _context.Books.Add(book.books);
+                
+                var idbook = _context.Books.OrderByDescending(x => x.Id).FirstOrDefault().Id;
+                foreach (var item in selectedauthor ?? Enumerable.Empty<int>())
+                {
+                    var authorbook = new AuthorBook();
+                    authorbook.IdAuthor = item;
+                    authorbook.IdBook = idbook;
+                    _context.AuthorBooks.Add(authorbook);
+                }
+                foreach (var item in selectedcategory ?? Enumerable.Empty<int>())
+                {
+                    var categorybook = new CategoryBook();
+                    categorybook.IdCategory = item;
+                    categorybook.IdBook = idbook;
+                    _context.CategoryBooks.Add(categorybook);
+                }
             }
             else
             {
-                var bookInDb = _context.Books.Single(c => c.Id == book.Id);
-                bookInDb.Name = book.Name;
-                bookInDb.Discount = book.Discount;
-                bookInDb.Price = book.Price;
-                bookInDb.Amount = book.Amount;
-                bookInDb.Description = book.Description;
-                bookInDb.AuthorBooks = book.AuthorBooks;
-                bookInDb.CategoryBooks = book.CategoryBooks;
-                bookInDb.IdPublisher = book.IdPublisher;
-                bookInDb.Price = book.Price;
+                var bookInDb = _context.Books.Find(book.books.Id);
+                bookInDb.Name = book.books.Name;
+                bookInDb.Discount = book.books.Discount;
+                bookInDb.Price = book.books.Price;
+                bookInDb.Amount = book.books.Amount;
+                bookInDb.Description = book.books.Description;
+                bookInDb.IdPublisher = book.books.IdPublisher;
+                bookInDb.Price = book.books.Price;
                 if (photo != null && photo.ContentLength > 0)
                 {
                     var path = Path.Combine(Server.MapPath("~/Areas/Admin/Data/BookImage/"),
@@ -132,11 +152,53 @@ namespace BookShop.Areas.Admin.Controllers
 
                     bookInDb.Photo = photo.FileName;
                 }
-                _context.SaveChanges();
-                return Redirect("~/Admin/Book");
+
+                //Thêm vào bảng AuthorBook
+                foreach (var item in selectedauthor ?? Enumerable.Empty<int>())
+                {
+                    if (!_context.AuthorBooks.Where(x => x.IdBook == book.books.Id).Any(x => x.IdAuthor == item))
+                    {
+                        var authorbook = new AuthorBook();
+                        authorbook.IdAuthor = item;
+                        authorbook.IdBook = book.books.Id;
+
+                        _context.AuthorBooks.Add(authorbook);
+                    }
+                }
+
+                //Xoá ở bảng AuthorBook
+                foreach (var item in _context.AuthorBooks.Where(x => x.IdBook == book.books.Id))
+                {
+                    if (!(selectedauthor ?? Enumerable.Empty<int>()).Any(x => x == item.IdAuthor))
+                    {
+                        _context.AuthorBooks.Remove(item);
+                    }
+                }
+
+
+                foreach (var item in selectedcategory ?? Enumerable.Empty<int>())
+                {
+                    if (!_context.CategoryBooks.Where(x => x.IdBook == book.books.Id).Any(x => x.IdCategory == item))
+                    {
+                        var categorybook = new CategoryBook();
+                        categorybook.IdCategory = item;
+                        categorybook.IdBook = book.books.Id;
+
+                        _context.CategoryBooks.Add(categorybook);
+                    }
+                }
+
+
+                foreach (var item in _context.CategoryBooks.Where(x => x.IdBook == book.books.Id))
+                {
+                    if (!(selectedcategory ?? Enumerable.Empty<int>()).Any(x => x == item.IdCategory))
+                    {
+                        _context.CategoryBooks.Remove(item);
+                    }
+                }
             }
-
-
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Book");
         }
 
         [ChildActionOnly]
@@ -151,7 +213,7 @@ namespace BookShop.Areas.Admin.Controllers
             return PartialView(category);
         }
 
-        [ChildActionOnly]
+        [ChildActionOnly]   
         public ActionResult ListBoxAuthor(int? IdBook = null)
         {
             var author = new AuthorListBoxViewModel();

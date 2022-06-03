@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -81,6 +84,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -165,14 +171,29 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BannerController.cs" />
     <Compile Include="Areas\Admin\Controllers\BookController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DeliveryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrderController.cs" />
     <Compile Include="Areas\Admin\Controllers\PublisherController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VoucherController.cs" />
+    <Compile Include="Areas\Admin\Dao\DeliveryDAO.cs" />
+    <Compile Include="Areas\Admin\Notification\NotificationComponent.cs" />
+    <Compile Include="Areas\Admin\Notification\NotificationHub.cs" />
     <Compile Include="Areas\Admin\ViewModels\AuthorListBoxViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\BookViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryListBoxViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\TopList.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -185,6 +206,14 @@
     <Compile Include="Migrations\202205071456305_init1.cs" />
     <Compile Include="Migrations\202205071456305_init1.designer.cs">
       <DependentUpon>202205071456305_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205081423250_init3.cs" />
+    <Compile Include="Migrations\202205081423250_init3.designer.cs">
+      <DependentUpon>202205081423250_init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205241446011_fixdetailorder.cs" />
+    <Compile Include="Migrations\202205241446011_fixdetailorder.designer.cs">
+      <DependentUpon>202205241446011_fixdetailorder.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -205,6 +234,8 @@
     <Compile Include="Models\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\CheckoutViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\dist\css\adminlte.css" />
@@ -2090,7 +2121,7 @@
     <Content Include="Areas\Admin\Content\plugins\uplot\uPlot.iife.js" />
     <Content Include="Areas\Admin\Content\plugins\uplot\uPlot.iife.min.js" />
     <Content Include="Areas\Admin\Content\plugins\uplot\uPlot.min.css" />
-    <Content Include="Areas\Admin\Data\addition.css" />
+    <Content Include="Areas\Admin\Content\addition.css" />
     <Content Include="Areas\Admin\Data\BannerImage\1.png" />
     <Content Include="Areas\Admin\Data\BannerImage\150x200.png" />
     <Content Include="Areas\Admin\Data\BannerImage\1533663558-181-fb.jpg" />
@@ -4008,6 +4039,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap-reboot.rtl.css" />
     <Content Include="Content\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap-utilities.css" />
     <Content Include="Content\bootstrap-utilities.min.css" />
     <Content Include="Content\bootstrap-utilities.rtl.css" />
@@ -4024,6 +4057,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -4200,7 +4235,148 @@
     <Content Include="Areas\Admin\Views\Book\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Book\ListBoxCategory.cshtml" />
     <Content Include="Areas\Admin\Views\Book\ListBoxAuthor.cshtml" />
+    <Content Include="Scripts\i18n\defaults-am_ET.js" />
+    <Content Include="Scripts\i18n\defaults-am_ET.min.js" />
+    <Content Include="Scripts\i18n\defaults-ar_AR.js" />
+    <Content Include="Scripts\i18n\defaults-ar_AR.min.js" />
+    <Content Include="Scripts\i18n\defaults-bg_BG.js" />
+    <Content Include="Scripts\i18n\defaults-bg_BG.min.js" />
+    <Content Include="Scripts\i18n\defaults-cs_CZ.js" />
+    <Content Include="Scripts\i18n\defaults-cs_CZ.min.js" />
+    <Content Include="Scripts\i18n\defaults-da_DK.js" />
+    <Content Include="Scripts\i18n\defaults-da_DK.min.js" />
+    <Content Include="Scripts\i18n\defaults-de_DE.js" />
+    <Content Include="Scripts\i18n\defaults-de_DE.min.js" />
+    <Content Include="Scripts\i18n\defaults-en_US.js" />
+    <Content Include="Scripts\i18n\defaults-en_US.min.js" />
+    <Content Include="Scripts\i18n\defaults-es_CL.js" />
+    <Content Include="Scripts\i18n\defaults-es_CL.min.js" />
+    <Content Include="Scripts\i18n\defaults-es_ES.js" />
+    <Content Include="Scripts\i18n\defaults-es_ES.min.js" />
+    <Content Include="Scripts\i18n\defaults-et_EE.js" />
+    <Content Include="Scripts\i18n\defaults-et_EE.min.js" />
+    <Content Include="Scripts\i18n\defaults-eu.js" />
+    <Content Include="Scripts\i18n\defaults-eu.min.js" />
+    <Content Include="Scripts\i18n\defaults-fa_IR.js" />
+    <Content Include="Scripts\i18n\defaults-fa_IR.min.js" />
+    <Content Include="Scripts\i18n\defaults-fi_FI.js" />
+    <Content Include="Scripts\i18n\defaults-fi_FI.min.js" />
+    <Content Include="Scripts\i18n\defaults-fr_FR.js" />
+    <Content Include="Scripts\i18n\defaults-fr_FR.min.js" />
+    <Content Include="Scripts\i18n\defaults-hr_HR.js" />
+    <Content Include="Scripts\i18n\defaults-hr_HR.min.js" />
+    <Content Include="Scripts\i18n\defaults-hu_HU.js" />
+    <Content Include="Scripts\i18n\defaults-hu_HU.min.js" />
+    <Content Include="Scripts\i18n\defaults-id_ID.js" />
+    <Content Include="Scripts\i18n\defaults-id_ID.min.js" />
+    <Content Include="Scripts\i18n\defaults-it_IT.js" />
+    <Content Include="Scripts\i18n\defaults-it_IT.min.js" />
+    <Content Include="Scripts\i18n\defaults-ja_JP.js" />
+    <Content Include="Scripts\i18n\defaults-ja_JP.min.js" />
+    <Content Include="Scripts\i18n\defaults-kh_KM.js" />
+    <Content Include="Scripts\i18n\defaults-kh_KM.min.js" />
+    <Content Include="Scripts\i18n\defaults-ko_KR.js" />
+    <Content Include="Scripts\i18n\defaults-ko_KR.min.js" />
+    <Content Include="Scripts\i18n\defaults-lt_LT.js" />
+    <Content Include="Scripts\i18n\defaults-lt_LT.min.js" />
+    <Content Include="Scripts\i18n\defaults-lv_LV.js" />
+    <Content Include="Scripts\i18n\defaults-lv_LV.min.js" />
+    <Content Include="Scripts\i18n\defaults-nb_NO.js" />
+    <Content Include="Scripts\i18n\defaults-nb_NO.min.js" />
+    <Content Include="Scripts\i18n\defaults-nl_NL.js" />
+    <Content Include="Scripts\i18n\defaults-nl_NL.min.js" />
+    <Content Include="Scripts\i18n\defaults-pl_PL.js" />
+    <Content Include="Scripts\i18n\defaults-pl_PL.min.js" />
+    <Content Include="Scripts\i18n\defaults-pt_BR.js" />
+    <Content Include="Scripts\i18n\defaults-pt_BR.min.js" />
+    <Content Include="Scripts\i18n\defaults-pt_PT.js" />
+    <Content Include="Scripts\i18n\defaults-pt_PT.min.js" />
+    <Content Include="Scripts\i18n\defaults-ro_RO.js" />
+    <Content Include="Scripts\i18n\defaults-ro_RO.min.js" />
+    <Content Include="Scripts\i18n\defaults-ru_RU.js" />
+    <Content Include="Scripts\i18n\defaults-ru_RU.min.js" />
+    <Content Include="Scripts\i18n\defaults-sk_SK.js" />
+    <Content Include="Scripts\i18n\defaults-sk_SK.min.js" />
+    <Content Include="Scripts\i18n\defaults-sl_SI.js" />
+    <Content Include="Scripts\i18n\defaults-sl_SI.min.js" />
+    <Content Include="Scripts\i18n\defaults-sr_SP.js" />
+    <Content Include="Scripts\i18n\defaults-sr_SP.min.js" />
+    <Content Include="Scripts\i18n\defaults-sv_SE.js" />
+    <Content Include="Scripts\i18n\defaults-sv_SE.min.js" />
+    <Content Include="Scripts\i18n\defaults-th_TH.js" />
+    <Content Include="Scripts\i18n\defaults-th_TH.min.js" />
+    <Content Include="Scripts\i18n\defaults-tr_TR.js" />
+    <Content Include="Scripts\i18n\defaults-tr_TR.min.js" />
+    <Content Include="Scripts\i18n\defaults-ua_UA.js" />
+    <Content Include="Scripts\i18n\defaults-ua_UA.min.js" />
+    <Content Include="Scripts\i18n\defaults-vi_VN.js" />
+    <Content Include="Scripts\i18n\defaults-vi_VN.min.js" />
+    <Content Include="Scripts\i18n\defaults-zh_CN.js" />
+    <Content Include="Scripts\i18n\defaults-zh_CN.min.js" />
+    <Content Include="Scripts\i18n\defaults-zh_TW.js" />
+    <Content Include="Scripts\i18n\defaults-zh_TW.js.map" />
+    <Content Include="Scripts\i18n\defaults-zh_CN.js.map" />
+    <Content Include="Scripts\i18n\defaults-vi_VN.js.map" />
+    <Content Include="Scripts\i18n\defaults-ua_UA.js.map" />
+    <Content Include="Scripts\i18n\defaults-tr_TR.js.map" />
+    <Content Include="Scripts\i18n\defaults-th_TH.js.map" />
+    <Content Include="Scripts\i18n\defaults-sv_SE.js.map" />
+    <Content Include="Scripts\i18n\defaults-sr_SP.js.map" />
+    <Content Include="Scripts\i18n\defaults-sl_SI.js.map" />
+    <Content Include="Scripts\i18n\defaults-sk_SK.js.map" />
+    <Content Include="Scripts\i18n\defaults-ru_RU.js.map" />
+    <Content Include="Scripts\i18n\defaults-ro_RO.js.map" />
+    <Content Include="Scripts\i18n\defaults-pt_PT.js.map" />
+    <Content Include="Scripts\i18n\defaults-pt_BR.js.map" />
+    <Content Include="Scripts\i18n\defaults-pl_PL.js.map" />
+    <Content Include="Scripts\i18n\defaults-nl_NL.js.map" />
+    <Content Include="Scripts\i18n\defaults-nb_NO.js.map" />
+    <Content Include="Scripts\i18n\defaults-lv_LV.js.map" />
+    <Content Include="Scripts\i18n\defaults-lt_LT.js.map" />
+    <Content Include="Scripts\i18n\defaults-ko_KR.js.map" />
+    <Content Include="Scripts\i18n\defaults-kh_KM.js.map" />
+    <Content Include="Scripts\i18n\defaults-ja_JP.js.map" />
+    <Content Include="Scripts\i18n\defaults-it_IT.js.map" />
+    <Content Include="Scripts\i18n\defaults-id_ID.js.map" />
+    <Content Include="Scripts\i18n\defaults-hu_HU.js.map" />
+    <Content Include="Scripts\i18n\defaults-hr_HR.js.map" />
+    <Content Include="Scripts\i18n\defaults-fr_FR.js.map" />
+    <Content Include="Scripts\i18n\defaults-fi_FI.js.map" />
+    <Content Include="Scripts\i18n\defaults-fa_IR.js.map" />
+    <Content Include="Scripts\i18n\defaults-eu.js.map" />
+    <Content Include="Scripts\i18n\defaults-et_EE.js.map" />
+    <Content Include="Scripts\i18n\defaults-es_ES.js.map" />
+    <Content Include="Scripts\i18n\defaults-es_CL.js.map" />
+    <Content Include="Scripts\i18n\defaults-en_US.js.map" />
+    <Content Include="Scripts\i18n\defaults-de_DE.js.map" />
+    <Content Include="Scripts\i18n\defaults-da_DK.js.map" />
+    <Content Include="Scripts\i18n\defaults-cs_CZ.js.map" />
+    <Content Include="Scripts\i18n\defaults-bg_BG.js.map" />
+    <Content Include="Scripts\i18n\defaults-ar_AR.js.map" />
+    <Content Include="Scripts\i18n\defaults-am_ET.js.map" />
+    <Content Include="Scripts\bootstrap-select.min.js.map" />
+    <Content Include="Scripts\bootstrap-select.js.map" />
+    <Content Include="Content\bootstrap-select.css.map" />
+    <Content Include="Areas\Admin\Views\Book\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Banner\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Delivery\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Delivery\Info.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Search.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Order\Info.cshtml" />
+    <Content Include="Areas\Admin\Views\Voucher\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Voucher\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Voucher\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
@@ -4245,11 +4421,24 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_Layout_Account.cshtml" />
+    <Content Include="Views\Home\RenderBanner.cshtml" />
+    <Content Include="Views\Home\RenderBestSeller.cshtml" />
+    <Content Include="Views\Home\RenderCategoriesHightlight.cshtml" />
+    <Content Include="Views\Home\RenderCategory.cshtml" />
+    <Content Include="Views\Home\RenderCategoryContent.cshtml" />
+    <Content Include="Views\Home\RenderNewBook.cshtml" />
+    <Content Include="Views\Cart\Checkout.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\RenderInformation.cshtml" />
+    <Content Include="Views\Cart\RenderProductOrdered.cshtml" />
+    <Content Include="Views\Cart\Success.cshtml" />
+    <Content Include="Views\Category\Content.cshtml" />
+    <Content Include="Views\Category\RenderContent.cshtml" />
+    <Content Include="Views\Customer\Login.cshtml" />
+    <Content Include="Views\Customer\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\NewFolder1\" />
-    <Folder Include="Areas\Admin\Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -4284,6 +4473,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205071456305_init1.resx">
       <DependentUpon>202205071456305_init1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205081423250_init3.resx">
+      <DependentUpon>202205081423250_init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205241446011_fixdetailorder.resx">
+      <DependentUpon>202205241446011_fixdetailorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,120 @@
+﻿@model IEnumerable<BookShop.Models.Banner>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Banner</h1>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="col-sm-2">
+                            <a href="~/Admin/Banner/Create" class="btn btn-primary">
+                                Thêm mới
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div>
+                            <div class="btn-group w-100 mb-2">
+                                <a class="btn btn-info" data-filter="all"> All items </a>
+                                <a class="btn btn-info" data-filter="Dynamic"> Dynamic </a>
+                                <a class="btn btn-info" data-filter="Static"> Static </a>
+                                <a class="btn btn-info" data-filter="None"> None </a>
+                            </div>
+                            <div class="mb-2">
+                                <a class="btn btn-secondary" data-shuffle=""> Shuffle items </a>
+                                <div class="float-right">
+                                    <select class="custom-select" style="width: auto;" data-sortorder="">
+                                        <option value="index"> Sort by Index </option>
+                                        <option value="stt"> Sort by STT </option>
+                                    </select>
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" data-sortasc=""> Ascending </a>
+                                        <a class="btn btn-default" data-sortdesc=""> Descending </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="filter-container p-0 row">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="filtr-item col-sm-2" data-category="@item.State" data-sort="@item.Id" data-stt="@item.Stt">
+                                        <a href="~/Admin/Banner/Edit/@item.Id" class="img-gallery" style="display:block">
+                                            <img src="~/Areas/Admin/Data/BannerImage/@item.Photo" alt="banner" class="img-fluid mb-2" style="height: 180.2px;width: 180.2px" />
+                                            <span class="item-desc">@item.State</span>
+                                            @if (item.Stt != null)
+                                            {
+                                                <span class="item-index">@item.Stt</span>
+
+                                            }
+
+
+                                        </a>
+                                        <a class="js-delete-banner" href="~/Admin/Banner/Delete/@item.Id">
+                                            <i class="far fa-trash-alt icon-delete"></i>
+                                        </a>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('.filter-container').filterizr({
+            layout: 'sameSize',
+            delay: 25,
+            gutterPixels: 4,
+            filterOutCss: {
+                opacity: 0,
+                transform: 'scale(0.75)'
+            },
+            filterInCss: {
+                opacity: 1,
+                transform: 'scale(1)'
+            }
+
+        });
+
+
+        $('.btn[data-filter]').on('click', function () {
+            $('.btn[data-filter]').removeClass('active');
+            $(this).addClass('active');
+        });
+
+
+        $(".filter-container").on("click", ".js-delete-banner", function (event) {
+            var button = $(this);
+
+            event.preventDefault();
+
+            bootbox.confirm("Bạn chắc chắn muốn xoá mục này?", function (r) {
+                if (r) {
+                    window.location = button.attr('href');
+                }
+            })
+        });
+    })
+</script>

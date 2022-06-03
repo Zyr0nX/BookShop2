@@ -1,0 +1,67 @@
+﻿@model List<BookShop.Models.CartViewModels>
+
+@{ 
+    Layout = null;
+}
+
+@using System.Globalization
+
+@{
+    int? totalPrice = 0;
+    int? totalAmount = 0;
+}
+
+<div class="checkout-product-ordered-list">
+    <div class="checkout-product-ordered-list__header-block">
+        <div class="checkout-product-ordered-list__headers">
+            <div class="checkout-product-ordered-list__header checkout-product-ordered-list__header--product">
+                <div class="checkout-product-ordered-list__title">Sản phẩm</div>
+            </div>
+            <div class="checkout-product-ordered-list__header hidden-sm">Đơn giá</div>
+            <div class="checkout-product-ordered-list__header hidden-sm">Số lượng</div>
+            <div class="checkout-product-ordered-list__header checkout-product-ordered-list__header--subtotal  hidden-sm">
+                Tổng số tiền:
+            </div>
+        </div>
+    </div>
+    <div class="checkout-product-ordered-list__content">
+        <div class="checkout-shop-order-group">
+            <div class="checkout-shop-order-group__orders">
+                <div class="checkout-product-ordered-list-item">
+                    <div class="checkout-product-ordered-list-item__items">
+                        @foreach (var item in Model)
+                        {
+                            <div class="checkout-product-ordered-list-item__item checkout-product-ordered-list-item__item--non-add-on">
+                                <div class="checkout-product-ordered-list-item__header checkout-product-ordered-list-item__header--product">
+                                    <img class="checkout-product-ordered-list-item__product-image"
+                                         src="./Trang giỏ hàng trên websiteMỹ Phẩm Ohui - LG Vina1_files/83-1596776828-myphamohui-lgvina.png"
+                                         width="40" height="40">
+                                    <span class="checkout-product-ordered-list-item__product-info">
+                                        <span class="checkout-product-ordered-list-item__product-name">
+                                            @item.Book.Name
+                                        </span>
+                                    </span>
+                                </div>
+                                <div class="checkout-product-ordered-list-item__header checkout-product-ordered-list-item__header--unit-price">
+                                    @(Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                </div>
+                                <div class="checkout-product-ordered-list-item__header checkout-product-ordered-list-item_header--amount">
+                                    @item.amount
+                                </div>
+                                <div class="checkout-product-ordered-list-item__header  checkout-product-ordered-list-item__header--subtotal">
+                                    @((Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100)*item.amount).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                </div>
+                            </div>
+                            totalPrice += (item.Book.Price * (100 - item.Book.Discount) / 100) * item.amount;
+                            totalAmount += item.amount;
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="_1pkbuI">
+                <div class="_1wd2xT">Tổng số tiền: (@(totalAmount) Sản phẩm):</div>
+                <div class="ZwtlWT">@((Convert.ToDouble(totalPrice).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN"))))</div>
+            </div>
+        </div>
+    </div>
+</div>

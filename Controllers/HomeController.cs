@@ -18,6 +18,48 @@ namespace BookShop.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        public ActionResult RenderBanner()
+        {
+            var model = _context.Banners;
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RenderCategory()
+        {
+            var model = _context.Categories;
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RenderBestSeller()
+        {
+            var model = _context.Books.OrderByDescending(book => book.DetailOrders.Count);
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RenderNewBook()
+        {
+            var model = _context.Books.OrderByDescending(book => book.Id);
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RenderCategoriesHightlight()
+        {
+            var model = _context.Categories;
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult RenderCategoryContent()
+        {
+            var model = _context.Books.OrderByDescending(book => book.Id).ToList();
+            return PartialView(model);
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<BookShop.Models.Category>
+
+@foreach (var item in Model)
+{
+    <div class="tickid-shop-collection-filter__collection ">
+        <a class="tickid-shop-collection-filter__collection-link"
+           href="@item.Id">@item.Name</a>
+    </div>
+}

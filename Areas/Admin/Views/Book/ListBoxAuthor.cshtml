@@ -1,11 +1,8 @@
 ﻿@model BookShop.Areas.Admin.ViewModels.AuthorListBoxViewModel
 
 <div class="form-group">
-    @Html.LabelFor(model => model.selectedauthor, htmlAttributes: new { @class = "control-label" })
-    <a class="btn btn-primary" href="~/Admin/Employee/Create">
-        <i class="fas fa-plus"></i>
-    </a>
+    @Html.LabelFor(model => model.authorName, htmlAttributes: new { @class = "control-label" })
     <div class="col-md-10">
-        @Html.ListBoxFor(model => model.selectedauthor, Model.authors, new { @class = "form-control selectpicker", data_live_search = "true" })
+        @Html.ListBoxFor(model => model.selectedauthor, Model.authors, htmlAttributes: new { @class = "form-control selectpicker", data_live_search = "true" })
     </div>
 </div>

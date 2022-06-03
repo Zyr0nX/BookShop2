@@ -1,0 +1,123 @@
+﻿@model List<BookShop.Models.CartViewModels>
+
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    int? totalPrice = 0;
+    int? totalAmount = 0;
+}
+
+@section scripts{
+    <script src="~/Scripts/Cart.js"></script>
+}
+
+<div class="cart-page cart-page--opc js-cart-page">
+    <div class="container">
+        <div role="main"
+             class="cart-page__content cart-page__content--opc js-cart-page-content">
+            <div class="cart-page-product-header">
+                <div class="cart-page-product-header__product">Sản phẩm</div>
+                <div class="cart-page-product-header__unit-price">Đơn giá</div>
+                <div class="cart-page-product-header__quantity">Số lượng</div>
+                <div class="cart-page-product-header__total-price">Giá</div>
+                <div class="cart-page-product-header__action">Thao tác</div>
+            </div>
+            <div class="cart-page-shop-section">
+                <div class="cart-page-shop-section__items">
+                    @foreach (var item in Model)
+                    {
+                        <div class="cart-item js-product-cart" data-product="8701" model="">
+                            <div class="cart-item__content">
+                                <div class="cart-item__cell-overview">
+                                    <a class="cart-item-overview__thumbnail-wrapper"
+                                       title="@item.Book.Name"
+                                       href="@item.Book.Name-@item.Book.Id">
+                                        <div class="cart-item-overview__thumbnail"
+                                             alt="cart_thumbnail"
+                                             style="background-image: url(/Areas/Admin/Data/BookImage/@item.Book.Photo);">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="cart-item__flex">
+                                    <div class="cart-item-overview__product-name-wrapper">
+                                        <a class="cart-item-overview__name"
+                                           title="Bộ cấp Nước Se Khít Lỗ Chân Lông Sum37 Water-full Set 5p"
+                                           href="@item.Book.Name-@item.Book.Id">
+                                            @item.Book.Name
+                                        </a>
+                                    </div>
+                                    <div class="cart-item-overview__price">
+                                        <div class="cart-item__cell-unit-price">
+                                            <span class="cart-item__unit-price cart-item__unit-price--after js-cart-item-unit-price">
+                                                @(Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                            </span>
+                                        </div>
+                                        <div class="cart-item__cell-quantity">
+                                            <div class="_19lAw4 tickid-input-quantity js-plus-minus"
+                                                 min="0" max="999">
+                                                <input type="text" class="txtAmount" data-id="@item.Book.Id" value="@item.amount" />
+                                            </div>
+                                        </div>
+                                        <div class="cart-item__cell-total-price js-cart-item-total-price">
+                                            @((Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100)*item.amount).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cart-item__cell-actions">
+                                    <button id="btnUpdate">Cập nhật</button>
+                                    <button id="btnDelete" data-id="@item.Book.Id">Xoá</button>
+                                </div>
+                            </div>
+                        </div>
+                        totalPrice += (item.Book.Price * (100 - item.Book.Discount) / 100) * item.amount;
+                        totalAmount += item.amount;
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="cart-page-footer js-cart-page-footer">
+            <div class="gF2I4C cart-page-footer__row1">
+                <div class="KYuIQC">Mã giảm giá</div>
+            </div>
+            <div class="cart-page-footer__row _1a6khS cart-page-footer__row5">
+                <div class="cart-page-footer__summary">
+                    <div class="cart-page-footer__first-summary">
+                        <div class="cart-page-footer-summary__subtotal">
+                            <div class="cart-page-footer-summary__subtotal-text">
+                                Tổng số tiền:
+                                (<span class="js-cart-page-footer-total-product">
+                                    @(totalAmount) Sản
+                                    phẩm
+                                </span>)
+                            </div>
+                            <div class="cart-page-footer-summary__subtotal-amount js-cart-page-footer-total-price">
+                                @((Convert.ToDouble(totalPrice).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN"))))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-page-footer__checkout">
+                    @if (Session["USER_SESSION"] == null)
+                    {
+                        <a type="button" href="/Customers/Login"
+                           class="tickid-button-solid tickid-button-solid--primary" id="btnCheckout">
+                            <span class="cart-page-footer__checkout-text">Đăng nhập để mua</span>
+                        </a>
+                    }
+                    else
+                    {
+                    <a type="button" href="/gio-hang/thanh-toan?id=@Session["USER_SESSION"]"
+                       class="tickid-button-solid tickid-button-solid--primary" id="btnCheckout">
+                        <span class="cart-page-footer__checkout-text">Mua ngay</span>
+                    </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

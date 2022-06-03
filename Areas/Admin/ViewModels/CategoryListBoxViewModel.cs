@@ -12,7 +12,7 @@
     {
         public List<SelectListItem> categories { set; get; }
         public int[] selectedcategory { set; get; }
-        [Display(Name = "Công nhân")]
+        [Display(Name = "Thể loại")]
         public string categoryName { set; get; }
     }
 }

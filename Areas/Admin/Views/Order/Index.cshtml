@@ -1,0 +1,248 @@
+﻿@model IEnumerable<BookShop.Models.Orders>
+@using BookShop.Areas.Admin.Dao
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Đơn hàng đang vận chuyển</h1>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Id)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Customer.Sdt)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Customer.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.OrderDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.TotalPrice)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.State.Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PaymentMethod)
+                                    </th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+
+                            @foreach (var item in Model)
+                            {
+                                var dao = new DeliveryDAO();
+                                var count = dao.CountTH(item.IdCustomer);
+                                var styleWarning = "display:none;";
+                                string titleTooltip = "";
+                                if (count > 0 && item.IdState != 3 && item.IdState != 5)
+                                {
+                                    styleWarning = "";
+                                    titleTooltip = "Người dùng có " + count.ToString() + " đơn hàng bị huỷ";
+                                }
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Customer.Sdt)
+                                <i class="fas fa-exclamation-circle warning-user" data-toggle="tooltip" data-placement="right" title="@titleTooltip" style=@styleWarning></i>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Customer.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalPrice)
+                            </td>
+                            @{
+                                string colorClass = "";
+                                string iconClass = "";
+                                string tenTT = "";
+                                string display = "";
+                                string link = "#";
+                                string huyBtn = "";
+                                switch (item.IdState)
+                                {
+                                    case 1:
+                                        colorClass = "#E56795";
+                                        iconClass = "fa-thumbs-up";
+                                        tenTT = item.State.Name;
+                                        link = "/Admin/Order/Confirm/" + item.Id;
+
+                                        break;
+                                    case 2:
+                                        colorClass = "#3c8dbc";
+                                        iconClass = "fa-truck";
+                                        tenTT = "Chờ Vận Chuyển";
+                                        link = "/Admin/Order/Delivering/" + item.Id;
+                                        break;
+                                    case 3:
+                                        colorClass = "#dc3545";
+                                        tenTT = "Đã Huỷ";
+                                        display = "display: none;";
+                                        huyBtn = "display: none;";
+
+                                        break;
+                                    case 4:
+                                        tenTT = item.State.Name;
+                                        colorClass = "#FF6F61";
+                                        iconClass = "fa-check-circle";
+                                        link = "/Admin/Order/Complete/" + item.Id;
+                                        break;
+                                    case 5:
+                                        tenTT = item.State.Name;
+                                        colorClass = "#28a745";
+                                        display = "display: none;";
+                                        huyBtn = "display: none;";
+                                        break;
+
+
+                                }
+                            }
+
+
+
+                            <td style="color: @colorClass; font-weight:600;">
+                                @tenTT
+                                <a class="btn btn-sm" href=@link style="background-color: @colorClass; @display">
+                                    <i class="@("fas "+iconClass)" style="color: white"></i>
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PaymentMethod)
+                            </td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" href="/Admin/Order/Info/@item.Id">
+                                    <i class="fas fa-info-circle">
+                                    </i>
+                                    Info
+                                </a>
+                                <a class="btn btn-danger btn-sm" id="huy-btn" href="/Admin/Order/Huy/@item.Id" style="@huyBtn">
+                                    <i class="fas fa-ban"></i>
+                                    Huỷ
+                                </a>
+                            </td>
+                        </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+
+
+
+    $(document).ready(function () {
+        $("#example1").DataTable()
+
+        $("#example1").on("click", "#huy-btn", function (event) {
+            event.preventDefault();
+
+            var button = $(this).attr('href');
+
+            var form = "<form id='infos' action='" + button + "' method='post'>" +
+                "<p>Vui lòng nhập lí do huỷ:</p>" +
+                '<input type="radio" id="receive" name="reason" value="Khách không nhận hàng" checked>' +
+                '<label class ="label-form" for="receive">Khách không nhận hàng</label><br>' +
+                '<input type="radio" id="confirm" name="reason" value="Không xác nhận được đơn hàng" >' +
+                '<label class ="label-form" for="confirm">Không xác nhận được đơn hàng</label><br>' +
+                '<input type="radio" id="return" name="reason" value="Trả hàng" >' +
+                '<label class ="label-form" for="return">Trả hàng</label><br>' +
+                '<input type="radio" id="other" name="reason" value="">' +
+                '<label class ="label-form" for="other">Khác</label>' +
+                '<input class="form-control" id="textOther" type="text" name="other" disabled/>' +
+            '</form >'
+
+
+            bootbox.confirm({
+                message: form,
+                buttons: {
+                    confirm: {
+                        label: 'OK',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (r) {
+                    if (r) {
+                        if (!$('#infos').valid())
+                            return false;
+                        else {
+                            $('#infos').submit();
+                        }
+                    }
+                }
+            });
+        });
+
+
+
+        $(document).on("shown.bs.modal", function () {
+            $('#textOther').prop('disabled', true);
+
+            $('#infos').validate({
+
+                messages: {
+                    reason: "Vui lòng chọn một lí do"
+                }
+            });
+
+            $('input[name="reason"]').change(function () {
+                if ($(this).val() != '') {
+                    $('#textOther').prop('disabled', true);
+                    $('#textOther').val('');
+                    $("#textOther").prop('required', false);
+                }
+                else {
+                    $('#textOther').prop('disabled', false);
+                    $('#textOther').rules('add', {
+                        required: true,
+                        messages: {
+                            required: "Vui lòng nhập lí do"
+
+                        }
+                    });
+                }
+
+
+            });
+        });
+
+    })
+
+</script>

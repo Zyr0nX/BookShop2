@@ -1,0 +1,164 @@
+﻿@model IEnumerable<BookShop.Models.Book>
+
+@using System.Globalization
+
+@{
+    Layout = null;
+}
+
+<div class="shop-all-product-view">
+    <h1 class="tickid-search-result-header">
+    </h1>
+    <div class="shop-search-result-view grid-card grid-card--four-up">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card__wrapper">
+                    <div class="card">
+                        <a href="/@item.Name-@item.Id"
+                           class="card-link ">
+                            <div class="_1gkBDw">
+                                <div class="_3ZDC1p card-header">
+                                    <div class="_1T9dHf _3XaILN"
+                                         style="background-image: url(/Areas/Admin/Data/BookImage/@item.Photo);background-size: contain; background-repeat: no-repeat;">
+                                    </div>
+                                    @if (item.Discount != 0)
+                                    {
+                                        <div class="_2N1Tif">
+                                            <div class="tickid-badge tickid-badge--fixed-width tickid-badge--promotion">
+                                                <div class="tickid-badge--promotion__label-wrapper tickid-badge--promotion__label-wrapper--vi-VN">
+                                                    <span class="percent">@(item.Discount)%</span>
+                                                    <span class="tickid-badge--promotion__label-wrapper__off-label tickid-badge--promotion__label-wrapper__off-label--vi-VN">giảm</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                                <div class="_1Ewdcf card-content">
+                                    <div class="_1JAmkB" data-sqe="name">
+                                        <div class="_1NoI8_ _2gr36I">
+                                            @item.Name
+                                        </div>
+                                    </div>
+                                    <div class="_36zw98">
+                                        @if (item.Discount == 0)
+                                        {
+                                            <div class="tickid-item-card__current-price tickid-item-card__current-price--free-shipping">
+                                                @(Convert.ToDouble(item.Price).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="tickid-item-card__section-price">
+                                                <div class="tickid-item-card__original-price">
+                                                    @(Convert.ToDouble(item.Price).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                                </div>
+                                                <div class="tickid-item-card__price-gap"></div>
+                                                <div class="tickid-item-card__current-price tickid-item-card__current-price--free-shipping">
+                                                    @(Convert.ToDouble(item.Price * (100 - item.Discount) / 100).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                                </div>
+                                                <div class="tickid-item-card__spacer"></div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="_2-i6yP">
+                                        <div class="Yy_uTH card_favorite js-card-favorite is-favorite"
+                                             data-product="364401">
+                                            <svg width="16" height="16"
+                                                 viewBox="0 0 16 16" version="1.1"
+                                                 class="icon-favorite">
+                                                <path fill="#f53d2f"
+                                                      d="m7.5718913 3.830906l.0395416.0333051c.1397621.1194612.2698939.2494171.3885671.3886499.1186733-.1392328.2488051-.2691887.3885671-.3886499l.0395416-.0333051c.6252617-.5189518 1.4350848-.830906 2.2718913-.830906 1.848 0 3.3 1.4506812 3.3 3.2970027 0 2.2659401-2.04 4.1122616-5.13 6.9177112l-.87.7852861-.87-.7912807c-3.09-2.799455-5.13-4.6457765-5.13-6.9117166 0-1.8463215 1.452-3.2970027 3.3-3.2970027.8368065 0 1.6466296.3119542 2.2718913.830906z">
+                                                </path>
+                                            </svg>
+                                            <svg height="16" viewBox="0 0 16 16"
+                                                 width="16" version="1.1"
+                                                 class="icon-not-favorite">
+                                                <path class="change_filter-favorite"
+                                                      d="m7.251221 4.2145388c-.549143-.4552525-1.2488781-.7145388-1.951221-.7145388-1.5719593 0-2.8 1.2269253-2.8 2.7970027 0 .5878515.158291 1.1598348.483492 1.7618948.6414654 1.1875754 1.5644044 2.1358244 4.4829309 4.7799304l.5348542.4864596.5326254-.4807607c2.9306205-2.660747 3.8471674-3.6039919 4.486777-4.7931984.3223805-.5993922.4793205-1.1689848.4793205-1.7543257 0-1.5700774-1.2280407-2.7970027-2.8-2.7970027-.7029148 0-1.4032175.2597087-1.9497845.7133288l-.0367779.0309601c-.1203966.1029087-.2318185.2143106-.3329071.3329122l-.3805305.4464557-.3805305-.4464557c-.1010886-.1186016-.2125105-.2300035-.3301434-.3305672z"
+                                                      fill="none" stroke="#000"
+                                                      stroke-opacity=".54"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="_2bRB2L" data-sqe="rating">
+                                            <div class="tickid-rating-stars">
+                                                <div class="tickid-rating-stars__stars">
+                                                    <div class="tickid-rating-stars__star-wrapper">
+                                                        <svg class="tickid-svg-icon tickid-rating-stars__gold-star icon-rating-solid"
+                                                             enable-background="new 0 0 15 15"
+                                                             viewBox="0 0 15 15" x="0"
+                                                             y="0">
+                                                            <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"
+                                                                     stroke-linecap="round"
+                                                                     stroke-linejoin="round"
+                                                                     stroke-miterlimit="10">
+                                                            </polygon>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tickid-rating-stars__star-wrapper">
+                                                        <svg class="tickid-svg-icon tickid-rating-stars__gold-star icon-rating-solid"
+                                                             enable-background="new 0 0 15 15"
+                                                             viewBox="0 0 15 15" x="0"
+                                                             y="0">
+                                                            <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"
+                                                                     stroke-linecap="round"
+                                                                     stroke-linejoin="round"
+                                                                     stroke-miterlimit="10">
+                                                            </polygon>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tickid-rating-stars__star-wrapper">
+                                                        <svg class="tickid-svg-icon tickid-rating-stars__gold-star icon-rating-solid"
+                                                             enable-background="new 0 0 15 15"
+                                                             viewBox="0 0 15 15" x="0"
+                                                             y="0">
+                                                            <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"
+                                                                     stroke-linecap="round"
+                                                                     stroke-linejoin="round"
+                                                                     stroke-miterlimit="10">
+                                                            </polygon>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tickid-rating-stars__star-wrapper">
+                                                        <svg class="tickid-svg-icon tickid-rating-stars__gold-star icon-rating-solid"
+                                                             enable-background="new 0 0 15 15"
+                                                             viewBox="0 0 15 15" x="0"
+                                                             y="0">
+                                                            <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"
+                                                                     stroke-linecap="round"
+                                                                     stroke-linejoin="round"
+                                                                     stroke-miterlimit="10">
+                                                            </polygon>
+                                                        </svg>
+                                                    </div>
+                                                    <div class="tickid-rating-stars__star-wrapper">
+                                                        <svg class="tickid-svg-icon tickid-rating-stars__gold-star icon-rating-solid"
+                                                             enable-background="new 0 0 15 15"
+                                                             viewBox="0 0 15 15" x="0"
+                                                             y="0">
+                                                            <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"
+                                                                     stroke-linecap="round"
+                                                                     stroke-linejoin="round"
+                                                                     stroke-miterlimit="10">
+                                                            </polygon>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="_3amru2 flex">
+                                        <span class="card__brand">@item.CategoryBooks.FirstOrDefault().Category.Name</span>
+
+                                        <span class="card__made-in">@item.AuthorBooks.FirstOrDefault().Author.Name</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

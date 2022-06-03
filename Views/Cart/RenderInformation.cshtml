@@ -1,0 +1,59 @@
+﻿@model BookShop.Models.Information
+<div id="modal-form-address" class="modal-form-address js-modal js-form-address"
+     action="/address/store">
+    <div class="tickid-modal__container">
+        <div class="tickid-modal__content">
+            <div class="tickid-popup-form address-modal">
+                <div class="tickid-popup-form__header">
+                    <div class="tickid-popup-form__title">Thêm địa chỉ mới</div>
+                </div>
+                @using (Html.BeginForm("Information", "Cart"))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="tickid-popup-form__main">
+                        <div class="tickid-popup-form__main-container">
+
+                            <div class="address-modal__form_input form-group js-form-group">
+                                <div class="input-with-status">
+                                    <div class="input-with-status__wrapper">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input-with-status__input js-name", @placeholder = "Tên người nhận" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="input-with-status__error-msg js-message-error"></span>
+                                </div>
+                            </div>
+                            <div class="address-modal__form_input form-group js-form-group">
+                                <div class="input-with-status">
+                                    <div class="input-with-status__wrapper">
+                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "input-with-status__input js-name", @placeholder = "Địa chỉ" } })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="input-with-status__error-msg js-message-error"></span>
+                                </div>
+                            </div>
+                            <div class="address-modal__form_input form-group js-form-group">
+                                <div class="input-with-status">
+                                    <div class="input-with-status__wrapper">
+                                        @Html.EditorFor(model => model.Sdt, new { htmlAttributes = new { @class = "input-with-status__input js-name", @placeholder = "Số điện thoại" } })
+                                        @Html.ValidationMessageFor(model => model.Sdt, "", new { @class = "text-danger" })
+                                    </div>
+                                    <span class="input-with-status__error-msg js-message-error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tickid-popup-form__footer">
+                        <button class="cancel-btn js-modal-close" target="modal-form-address">
+                            Trở
+                            lại
+                        </button>
+                        <input type="submit"
+                               class="btn btn-solid-primary btn--s btn--inline _3FRDZQ js-submit-form-address" text="Tiếp tục">
+                    </div>
+
+                }
+            </div>
+        </div>
+        <div class="tickid-modal__overlay"></div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BookShop.Models.DetailOrder>
+
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    int? totalPrice = 0;
+}
+
+@using System.Globalization
+<div class="cart-success cart-success--page">
+    <div class="container">
+        <div class="cart-success__content">
+            <div class="cart-success__header">
+                <div class="cart-success__title">
+                    <h4>Đặt hàng thành công !</h4>
+                    <p>Cảm ơn bạn đã đặt mua hàng</p>
+                    <p>
+                        Đơn hàng của bạn hiện đang được xử lý. Chúng tôi sẽ sớm liên hệ để giao
+                        hàng.
+                    </p>
+                </div>
+                <div class="cart-success__subtitle">
+                    Mã đơn hàng của bạn: <b>@Model.First().Orders.Id</b> -
+                    @Convert.ToDateTime(Model.First().Orders.OrderDate).ToString("hh:mm dd/MM/yyyy")
+                </div>
+            </div>
+            <div class="cart-success__body">
+                <div class="cart-success__box">
+                    <div class="cart-success__box-title">Thông tin đơn hàng: </div>
+                    <div class="cart-success__list">
+                        <div class="cart-success__item cart-success__item--label">
+                            <div class="cart-success__item-image">Ảnh</div>
+                            <div class="cart-success__item-name">Tên sản phẩm</div>
+                            <div class="cart-success__item-quantity">Số lượng</div>
+                            <div class="cart-success__item-attribute">Thuộc tính</div>
+                            <div class="cart-success__item-price">Giá</div>
+                        </div>
+                        @foreach (var item in Model)
+                        {
+                            <div class="cart-success__item">
+                                <div class="cart-success__item-image">
+                                    <figure class="figure">
+                                        <img src="~/Areas/Admin/Data/BookImage/@item.Book.Photo"
+                                             alt="">
+                                    </figure>
+                                </div>
+                                <div class="cart-success__item-name">
+                                    @item.Book.Name
+                                </div>
+                                <div class="cart-success__item-quantity">@item.Amount</div>
+                                <div class="cart-success__item-attribute"></div>
+                                <div class="cart-success__item-price">@(Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))</div>
+                            </div>
+                            totalPrice += (item.Book.Price * (100 - item.Book.Discount) / 100) * item.Amount;
+                        }
+                        <div class="cart-success__item cart-success__item--label">
+                            <div class="cart-success__item-title">Tổng thanh toán</div>
+                            <div class="cart-success__item-value">@(Convert.ToDouble(totalPrice).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-success__box">
+                    <div class="cart-success__box-title">Thông tin nhận hàng:</div>
+                    <div class="cart-success__address">
+                        <div class="cart-success__address-group">
+                            <label class="cart-success__address-label">Người nhận :</label>
+                            <p class="cart-success__address-content">@Model.First().Orders.Information.Name</p>
+                        </div>
+                        <div class="cart-success__address-group">
+                            <label class="cart-success__address-label">Số điện thoại </label>
+                            <p class="cart-success__address-content">@Model.First().Orders.Information.Sdt</p>
+                        </div>
+                        <div class="cart-success__address-group">
+                            <label class="cart-success__address-label">Địa chỉ</label>
+                            <p class="cart-success__address-content">@Model.First().Orders.Information.Address</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-success__footer">
+                <!-- Đăng nhập để nhận thưởng -->
+            </div>
+        </div>
+    </div>
+</div>

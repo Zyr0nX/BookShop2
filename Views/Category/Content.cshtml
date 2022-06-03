@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Content";
+}
+
+<div class="shop-search-page container">
+    <div class="shop-search-page__body-section">
+        <div class="shop-search-page__left-section">
+            <div class="shop-search-page__filter-wrapper shop-search-page__filter-wrapper--categories">
+                <div class="tickid-shop-collection-filter">
+                    <div class="tickid-shop-collection-filter__header">Danh Mục</div>
+                    <div class="tickid-shop-collection-filter__body">
+                        @{ Html.RenderAction("RenderCategory", "Home"); }
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="shop-search-page__right-section">
+            @{ Html.RenderAction("RenderContent", "Categories", new { id = Request.Params["id"] }); }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BookShop.Models.Book>
+
+@using System.Globalization
+
+@foreach (var item in Model)
+{
+    <div class="_3cyAdE">
+        <a class="tickid-item-card--link tickid-item-card-padding js-card-slider-link"
+           title="@item.Name"
+           href="@item.Name-@item.Id">
+            <div class="tickid-item-card tickid-item-card--full">
+                <div class="tickid-item-card__cover-img">
+                    <div class="_3ZDC1p">
+                        <div class="tickid-item-card__cover-img-background _3XaILN"
+                             style="background-image: url(~/Areas/Admin/Data/BookImage/@item.Photo); background-size: contain; background-repeat: no-repeat;">
+                        </div>
+                        @if (item.Discount != 0)
+                        {
+                            <div class="_2N1Tif">
+                                <div class="tickid-badge tickid-badge--fixed-width tickid-badge--promotion">
+                                    <div class="tickid-badge--promotion__label-wrapper tickid-badge--promotion__label-wrapper--vi-VN">
+                                        <span class="percent">@(item.Discount)%</span>
+                                        <span class="tickid-badge--promotion__label-wrapper__off-label tickid-badge--promotion__label-wrapper__off-label--vi-VN">giảm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="">
+                            <div class="tickid-item-card__text-name">
+                                @item.Name
+                            </div>
+                            @if (item.Discount == 0)
+                            {
+                                <div class="tickid-item-card__current-price tickid-item-card__current-price--free-shipping">
+                                    @(Convert.ToDouble(item.Price).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="tickid-item-card__section-price">
+                                    <div class="tickid-item-card__original-price">
+                                        @(Convert.ToDouble(item.Price).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                    </div>
+                                    <div class="tickid-item-card__price-gap"></div>
+                                    <div class="tickid-item-card__current-price tickid-item-card__current-price--free-shipping">
+                                        @(Convert.ToDouble(item.Price * (100 - item.Discount) / 100).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))
+                                    </div>
+                                    <div class="tickid-item-card__spacer"></div>
+                                </div>
+                            }
+                            <div class="tickid-item-card__extra-badge-wrapper"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+}
