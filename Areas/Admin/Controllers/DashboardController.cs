@@ -8,7 +8,7 @@ using BookShop.Areas.Admin.Dao;
 
 namespace BookShop.Areas.Admin.Controllers
 {
-
+    [Authorize]
     public class DashboardController : Controller
     {
 

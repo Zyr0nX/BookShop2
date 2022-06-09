@@ -28,23 +28,16 @@
                         Photo = c.String(maxLength: 500),
                         Description = c.String(),
                         IdPublisher = c.Int(nullable: false),
+                        IdAuthor = c.Int(nullable: false),
+                        IdCategory = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Publisher", t => t.IdPublisher)
-                .Index(t => t.IdPublisher);
-            
-            CreateTable(
-                "dbo.CategoryBook",
-                c => new
-                    {
-                        IdCategory = c.Int(nullable: false),
-                        IdBook = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.IdCategory, t.IdBook })
                 .ForeignKey("dbo.Category", t => t.IdCategory)
-                .ForeignKey("dbo.Book", t => t.IdBook)
-                .Index(t => t.IdCategory)
-                .Index(t => t.IdBook);
+                .ForeignKey("dbo.Publisher", t => t.IdPublisher)
+                .ForeignKey("dbo.Author", t => t.IdAuthor)
+                .Index(t => t.IdPublisher)
+                .Index(t => t.IdAuthor)
+                .Index(t => t.IdCategory);
             
             CreateTable(
                 "dbo.Category",
@@ -61,9 +54,9 @@
                     {
                         IdOrder = c.Int(nullable: false),
                         IdBook = c.Int(nullable: false),
-                        Amount = c.Int(),
-                        Price = c.Int(),
-                        TotalPrice = c.Int(),
+                        Amount = c.Int(nullable: false),
+                        Price = c.Int(nullable: false),
+                        TotalPrice = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.IdOrder, t.IdBook })
                 .ForeignKey("dbo.Orders", t => t.IdOrder)
@@ -240,19 +233,6 @@
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            CreateTable(
-                "dbo.AuthorBook",
-                c => new
-                    {
-                        IdAuthor = c.Int(nullable: false),
-                        IdBook = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.IdAuthor, t.IdBook })
-                .ForeignKey("dbo.Author", t => t.IdAuthor, cascadeDelete: true)
-                .ForeignKey("dbo.Book", t => t.IdBook, cascadeDelete: true)
-                .Index(t => t.IdAuthor)
-                .Index(t => t.IdBook);
-            
         }
         
         public override void Down()
@@ -261,8 +241,7 @@
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.AuthorBook", "IdBook", "dbo.Book");
-            DropForeignKey("dbo.AuthorBook", "IdAuthor", "dbo.Author");
+            DropForeignKey("dbo.Book", "IdAuthor", "dbo.Author");
             DropForeignKey("dbo.Book", "IdPublisher", "dbo.Publisher");
             DropForeignKey("dbo.DetailOrder", "IdBook", "dbo.Book");
             DropForeignKey("dbo.Orders", "IdVoucher", "dbo.Voucher");
@@ -271,10 +250,7 @@
             DropForeignKey("dbo.Orders", "IdCustomer", "dbo.Customer");
             DropForeignKey("dbo.Orders", "IdInformation", "dbo.Information");
             DropForeignKey("dbo.Information", "IdCustomer", "dbo.Customer");
-            DropForeignKey("dbo.CategoryBook", "IdBook", "dbo.Book");
-            DropForeignKey("dbo.CategoryBook", "IdCategory", "dbo.Category");
-            DropIndex("dbo.AuthorBook", new[] { "IdBook" });
-            DropIndex("dbo.AuthorBook", new[] { "IdAuthor" });
+            DropForeignKey("dbo.Book", "IdCategory", "dbo.Category");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
@@ -288,10 +264,9 @@
             DropIndex("dbo.Orders", new[] { "IdVoucher" });
             DropIndex("dbo.DetailOrder", new[] { "IdBook" });
             DropIndex("dbo.DetailOrder", new[] { "IdOrder" });
-            DropIndex("dbo.CategoryBook", new[] { "IdBook" });
-            DropIndex("dbo.CategoryBook", new[] { "IdCategory" });
+            DropIndex("dbo.Book", new[] { "IdCategory" });
+            DropIndex("dbo.Book", new[] { "IdAuthor" });
             DropIndex("dbo.Book", new[] { "IdPublisher" });
-            DropTable("dbo.AuthorBook");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
@@ -306,7 +281,6 @@
             DropTable("dbo.Orders");
             DropTable("dbo.DetailOrder");
             DropTable("dbo.Category");
-            DropTable("dbo.CategoryBook");
             DropTable("dbo.Book");
             DropTable("dbo.Author");
         }

@@ -1,0 +1,88 @@
+﻿@model BookShop.Models.Book
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-product js-product-cart js-product" data-product="7141">
+    <div role="main" class="container">
+        <div class="flex items-center _1z1CEl breadcrumbs">
+            <ul class="breadcrumbs__list">
+                <li class="breadcrumbs__item">
+                    <a class="JFOy4z breadcrumbs__item-link" href="/">Trang chủ</a>
+
+                    <svg class="tickid-svg-icon _3kIvpP icon-arrow-right"
+                            enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0" y="0">
+                        <path d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="breadcrumbs__item">
+                    @*<a class="JFOy4z breadcrumbs__item-link"
+                        href="/danh-muc/@item.Category.Name?id=@item.Category.Id">@item.Category.Name</a>*@
+
+                    <svg class="tickid-svg-icon _3kIvpP icon-arrow-right"
+                            enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0" y="0">
+                        <path d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
+                        </path>
+                    </svg>
+                </li>
+                <li class="breadcrumbs__item">
+                    <span class="OSgLcw">@Model.Name</span>
+                </li>
+            </ul>
+        </div>
+        @{ Html.RenderAction("RenderProductContent", "Product", new { id = @Model.Id }); }
+        <div class="page-product__content">
+            <div class="page-product__content--left">
+                @{ Html.RenderAction("RenderProductDetail", "Product", new { id = @Model.Id }); }
+                <div class="_2Vb4g5 card promotion-combo js-promotion-combo">
+                    <div class="_3hEEfi promotion-combo__header">
+                        <div class="_1ahGUN promotion-combo__header-left">
+                            <div class="_2ti2Ft promotion-combo__title">
+                                Sản phẩm bán chạy
+                            </div>
+                            <!-- <div class="-zU8GN promotion-combo__discount">Mua 2 &amp; giảm 5%</div> -->
+                        </div>
+                        <div class="promotion-combo__header-right">
+                            <a class="center _2NUz9G" href="danh-muc/whoo-make-up.html">
+                                Xem tất
+                                cả<svg class="tickid-svg-icon icon-arrow-right"
+                                        enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0"
+                                        y="0">
+                                    <path d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="_2HIeHZ promotion-combo-list js-slider-product-releted">
+                        @{ Html.RenderAction("RenderBestSeller", "Home"); }
+                    </div>
+                </div>
+                <div class="_2Vb4g5 card promotion-combo js-promotion-combo">
+                    <div class="_3hEEfi promotion-combo__header">
+                        <div class="_1ahGUN promotion-combo__header-left">
+                            <div class="_2ti2Ft promotion-combo__title">Sản phẩm mới </div>
+                        </div>
+                        <div class="promotion-combo__header-right">
+                            <a class="center _2NUz9G" href="all8883.html?sortBy=sales">
+                                Xem tất
+                                cả<svg class="tickid-svg-icon icon-arrow-right"
+                                        enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0"
+                                        y="0">
+                                    <path d="m2.5 11c .1 0 .2 0 .3-.1l6-5c .1-.1.2-.3.2-.4s-.1-.3-.2-.4l-6-5c-.2-.2-.5-.1-.7.1s-.1.5.1.7l5.5 4.6-5.5 4.6c-.2.2-.2.5-.1.7.1.1.3.2.4.2z">
+                                    </path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="_2HIeHZ promotion-combo-list js-slider-product-releted">
+                        @{ Html.RenderAction("RenderNewBook", "Home"); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

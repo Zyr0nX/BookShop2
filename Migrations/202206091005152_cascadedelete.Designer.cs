@@ -7,13 +7,13 @@ namespace BookShop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class init1 : IMigrationMetadata
+    public sealed partial class cascadedelete : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(init1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(cascadedelete));
         
         string IMigrationMetadata.Id
         {
-            get { return "202205071456305_init1"; }
+            get { return "202206091005152_cascadedelete"; }
         }
         
         string IMigrationMetadata.Source

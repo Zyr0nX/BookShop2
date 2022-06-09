@@ -1,4 +1,4 @@
-﻿@model BookShop.Models.Orders
+﻿@model BookShop.Models.Order
 @using BookShop.Areas.Admin.Dao
 @{
     ViewBag.Title = "Info";
@@ -83,14 +83,14 @@
                                     @{
                                         var dao = new DeliveryDAO();
                                     }
-                                    @foreach (var item in Model.DetailOrder)
+                                    @foreach (var item in Model.DetailOrders)
                                     {
                                         <tr>
                                             <td>@item.IdBook</td>
                                             <td>@dao.GetBook(item.IdBook).Name</td>
                                             <td>@dao.GetBook(item.IdBook).Publisher.Name</td>
                                             <td>@item.Amount</td>
-                                            <td>@item.TotalPrice</td>                                           
+                                            <td>@item.TotalPrice</td>                                          
                                         </tr>
 
                                     }

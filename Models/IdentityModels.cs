@@ -21,11 +21,9 @@ namespace BookShop.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Author> Authors { get; set; }
-        public virtual DbSet<AuthorBook> AuthorBooks { get; set; }
         public virtual DbSet<Banner> Banners { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CategoryBook> CategoryBooks { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<DetailOrder> DetailOrders { get; set; }
         public virtual DbSet<Information> Informations { get; set; }
@@ -45,66 +43,55 @@ namespace BookShop.Models
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.Customer)
                 .HasForeignKey(e => e.IdCustomer)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Book>()
                 .HasMany(e => e.DetailOrders)
                 .WithRequired(e => e.Book)
                 .HasForeignKey(e => e.IdBook)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Book>()
-                .HasMany(e => e.CategoryBooks)
-                .WithRequired(e => e.Book)
-                .HasForeignKey(e => e.IdBook)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Book>()
-                .HasMany(e => e.AuthorBooks)
-                .WithRequired(e => e.Book)
-                .HasForeignKey(e => e.IdBook)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Category>()
-                .HasMany(e => e.CategoryBooks)
-                .WithRequired(e => e.Category)
-                .HasForeignKey(e => e.IdCategory)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Author>()
-                .HasMany(e => e.AuthorBooks)
-                .WithRequired(e => e.Author)
-                .HasForeignKey(e => e.IdAuthor)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Information>()
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.Information)
                 .HasForeignKey(e => e.IdInformation)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.DetailOrders)
                 .WithRequired(e => e.Order)
                 .HasForeignKey(e => e.IdOrder)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Publisher>()
                 .HasMany(e => e.Books)
                 .WithRequired(e => e.Publisher)
                 .HasForeignKey(e => e.IdPublisher)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Author>()
+                .HasMany(e => e.Books)
+                .WithRequired(e => e.Author)
+                .HasForeignKey(e => e.IdAuthor)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Category>()
+                .HasMany(e => e.Books)
+                .WithRequired(e => e.Category)
+                .HasForeignKey(e => e.IdCategory)
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<State>()
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.State)
                 .HasForeignKey(e => e.IdState)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Voucher>()
                 .HasMany(e => e.Orders)
                 .WithOptional(e => e.Voucher)
-                .HasForeignKey(e => e.IdVoucher);
+                .HasForeignKey(e => e.IdVoucher)
+                .WillCascadeOnDelete(true);
         }
 
         public static ApplicationDbContext Create()

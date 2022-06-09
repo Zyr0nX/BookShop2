@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace BookShop.Areas.Admin.Controllers
 {
-
+    [Authorize]
     public class OrderController : Controller
     {
         private ApplicationDbContext _context;

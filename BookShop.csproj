@@ -190,39 +190,28 @@
     <Compile Include="Areas\Admin\ViewModels\BookViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryListBoxViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TopList.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205071119566_init.cs" />
-    <Compile Include="Migrations\202205071119566_init.designer.cs">
-      <DependentUpon>202205071119566_init.cs</DependentUpon>
+    <Compile Include="Migrations\202206040938400_init.cs" />
+    <Compile Include="Migrations\202206040938400_init.designer.cs">
+      <DependentUpon>202206040938400_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202205071456305_init1.cs" />
-    <Compile Include="Migrations\202205071456305_init1.designer.cs">
-      <DependentUpon>202205071456305_init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202205081423250_init3.cs" />
-    <Compile Include="Migrations\202205081423250_init3.designer.cs">
-      <DependentUpon>202205081423250_init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202205241446011_fixdetailorder.cs" />
-    <Compile Include="Migrations\202205241446011_fixdetailorder.designer.cs">
-      <DependentUpon>202205241446011_fixdetailorder.cs</DependentUpon>
+    <Compile Include="Migrations\202206091005152_cascadedelete.cs" />
+    <Compile Include="Migrations\202206091005152_cascadedelete.designer.cs">
+      <DependentUpon>202206091005152_cascadedelete.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Author.cs" />
-    <Compile Include="Models\AuthorBook.cs" />
     <Compile Include="Models\Banner.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryBook.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\DetailOrder.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -4057,6 +4046,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Scripts\bootbox.js" />
+    <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap-select.js" />
     <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -4233,8 +4224,6 @@
     <Content Include="Areas\Admin\Views\Author\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Book\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Book\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Book\ListBoxCategory.cshtml" />
-    <Content Include="Areas\Admin\Views\Book\ListBoxAuthor.cshtml" />
     <Content Include="Scripts\i18n\defaults-am_ET.js" />
     <Content Include="Scripts\i18n\defaults-am_ET.min.js" />
     <Content Include="Scripts\i18n\defaults-ar_AR.js" />
@@ -4398,18 +4387,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\_Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
     <Content Include="Views\Manage\Index.cshtml" />
@@ -4419,7 +4396,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_Layout_Account.cshtml" />
     <Content Include="Views\Home\RenderBanner.cshtml" />
     <Content Include="Views\Home\RenderBestSeller.cshtml" />
@@ -4436,6 +4412,10 @@
     <Content Include="Views\Category\RenderContent.cshtml" />
     <Content Include="Views\Customer\Login.cshtml" />
     <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Product\RenderProductContent.cshtml" />
+    <Content Include="Views\Product\RenderProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4468,17 +4448,11 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202205071119566_init.resx">
-      <DependentUpon>202205071119566_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206040938400_init.resx">
+      <DependentUpon>202206040938400_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205071456305_init1.resx">
-      <DependentUpon>202205071456305_init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205081423250_init3.resx">
-      <DependentUpon>202205081423250_init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202205241446011_fixdetailorder.resx">
-      <DependentUpon>202205241446011_fixdetailorder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202206091005152_cascadedelete.resx">
+      <DependentUpon>202206091005152_cascadedelete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

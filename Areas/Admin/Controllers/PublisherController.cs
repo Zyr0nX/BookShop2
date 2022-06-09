@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace BookShop.Areas.Admin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class PublisherController : Controller
     {
         private ApplicationDbContext _context;

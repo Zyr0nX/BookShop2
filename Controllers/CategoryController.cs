@@ -20,7 +20,7 @@ namespace BookShop.Controllers
         public ActionResult RenderContent(int id)
         {
             var model = from x in _context.Books
-                        where x.CategoryBooks.FirstOrDefault().IdCategory == id
+                        where x.IdCategory == id
                         select x;
             return View(model);
         }

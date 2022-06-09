@@ -17,8 +17,6 @@ namespace BookShop.Models
         public Book()
         {
             DetailOrders = new HashSet<DetailOrder>();
-            AuthorBooks = new HashSet<AuthorBook>();
-            CategoryBooks = new HashSet<CategoryBook>();
         }
 
         public int Id { get; set; }
@@ -55,13 +53,19 @@ namespace BookShop.Models
 
         public virtual Publisher Publisher { get; set; }
 
+        [Display(Name = "Tác giả")]
+        [Required]
+        public int? IdAuthor { get; set; }
+
+        public virtual Author Author { get; set; }
+
+        [Display(Name = "Thể loại")]
+        [Required]
+        public int? IdCategory { get; set; }
+
+        public virtual Category Category { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetailOrder> DetailOrders { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AuthorBook> AuthorBooks { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CategoryBook> CategoryBooks { get; set; }
     }
 }
