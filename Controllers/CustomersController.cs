@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace BookShop.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         // GET: Customer
         ApplicationDbContext _context = new ApplicationDbContext();
@@ -19,18 +19,18 @@ namespace BookShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model)
+        public ActionResult Register(RegisterViewModels model)
         {
             if (ModelState.IsValid)
             {
-                if (IsExistUsername(model.UserName))
+                if (IsExistUsername(model.Username))
                 {
                     ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
                 }
                 else
                 {
                     var customer = new Customer();
-                    customer.Username = model.UserName;
+                    customer.Username = model.Username;
                     customer.Password = model.Password;
                     _context.Customers.Add(customer);
                     _context.SaveChanges();
@@ -52,14 +52,14 @@ namespace BookShop.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginViewModels model)
         {
             if (ModelState.IsValid)
             {
-                var result = CheckLogin(model.UserName, model.Password);
+                var result = CheckLogin(model.Username, model.Password);
                 if (result == true)
                 {
-                    var user = _context.Customers.SingleOrDefault(x => x.Username == model.UserName);
+                    var user = _context.Customers.SingleOrDefault(x => x.Username == model.Username);
                     Session.Add("USER_SESSION", user.Id);
                     Session.Add("USERNAME", user.Username);
                     return Redirect("/");

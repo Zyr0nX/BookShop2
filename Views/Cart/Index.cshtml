@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
+@{
     int? totalPrice = 0;
     int? totalAmount = 0;
 }
@@ -111,10 +111,10 @@
                     }
                     else
                     {
-                    <a type="button" href="/gio-hang/thanh-toan?id=@Session["USER_SESSION"]"
-                       class="tickid-button-solid tickid-button-solid--primary" id="btnCheckout">
-                        <span class="cart-page-footer__checkout-text">Mua ngay</span>
-                    </a>
+                        <a type="button" href="/gio-hang/thanh-toan?id=@Session["USER_SESSION"]"
+                           class="tickid-button-solid tickid-button-solid--primary" id="btnCheckout">
+                            <span class="cart-page-footer__checkout-text">Mua ngay</span>
+                        </a>
                     }
                 </div>
             </div>

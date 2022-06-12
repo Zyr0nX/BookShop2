@@ -11,12 +11,12 @@
 
                 <div class="card__wrapper">
                     <div class="card">
-                        <a href="@item.Name-@item.Id"
+                        <a href="/@item.Name-@item.Id"
                            class="card-link ">
                             <div class="_1gkBDw">
                                 <div class="_3ZDC1p card-header">
                                     <div class="_1T9dHf _3XaILN"
-                                         style="background-image: url(~/Areas/Admin/Data/BookImage/@item.Photo);background-size: contain; background-repeat: no-repeat;">
+                                         style="background-image: url(/Areas/Admin/Data/BookImage/@item.Photo);background-size: contain; background-repeat: no-repeat;">
                                     </div>
                                     <div class="_2N1Tif">
                                         <div class="tickid-badge tickid-badge--fixed-width tickid-badge--promotion">
@@ -142,15 +142,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="_18SLBt">1 đã bán</div>
                                     </div>
                                     <div class="_3amru2 flex">
-                                        <span class="card__brand">**Tên thể loại**</span>
-
-                                        <span class="card__made-in">
-                                            Hàn
-                                            Quốc
-                                        </span>
+                                        <span class="card__brand">@item.Category.Name</span>
                                     </div>
                                 </div>
                             </div>
@@ -171,12 +165,12 @@
                 {
                     <div class="card__wrapper">
                         <div class="card">
-                            <a href="@item.Name-@item.Id"
+                            <a href="/@item.Name-@item.Id"
                                class="card-link ">
                                 <div class="_1gkBDw">
                                     <div class="_3ZDC1p card-header">
                                         <div class="_1T9dHf _3XaILN"
-                                             style="background-image: url(~/Areas/Admin/Data/BookImage/@item.Photo);background-size: contain; background-repeat: no-repeat;">
+                                             style="background-image: url(/Areas/Admin/Data/BookImage/@item.Photo);background-size: contain; background-repeat: no-repeat;">
                                         </div>
                                         <div class="_2N1Tif">
                                             <div class="tickid-badge tickid-badge--fixed-width tickid-badge--promotion">
@@ -195,7 +189,7 @@
                                                 @item.Name
                                             </div>
                                         </div>
-                                        <
+
                                         <div class="_36zw98">
                                             @if (item.Discount == 0)
                                             {
@@ -304,17 +298,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="_18SLBt">
-                                                1 đã bán
-                                            </div>
                                         </div>
                                         <div class="_3amru2 flex">
-                                            <span class="card__brand">**Tên thể loại**</span>
-
-                                            <span class="card__made-in">
-                                                Hàn
-                                                Quốc
-                                            </span>
+                                            <span class="card__brand">@item.Category.Name</span>
                                         </div>
                                     </div>
                                 </div>

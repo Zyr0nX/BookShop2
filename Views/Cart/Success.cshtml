@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
+@{
     int? totalPrice = 0;
 }
 
@@ -23,8 +23,8 @@
                     </p>
                 </div>
                 <div class="cart-success__subtitle">
-                    Mã đơn hàng của bạn: <b>@Model.First().Orders.Id</b> -
-                    @Convert.ToDateTime(Model.First().Orders.OrderDate).ToString("hh:mm dd/MM/yyyy")
+                    Mã đơn hàng của bạn: <b>@Model.First().Order.Id</b> -
+                    @Convert.ToDateTime(Model.First().Order.OrderDate).ToString("hh:mm dd/MM/yyyy")
                 </div>
             </div>
             <div class="cart-success__body">
@@ -68,15 +68,15 @@
                     <div class="cart-success__address">
                         <div class="cart-success__address-group">
                             <label class="cart-success__address-label">Người nhận :</label>
-                            <p class="cart-success__address-content">@Model.First().Orders.Information.Name</p>
+                            <p class="cart-success__address-content">@Model.First().Order.Information.Name</p>
                         </div>
                         <div class="cart-success__address-group">
                             <label class="cart-success__address-label">Số điện thoại </label>
-                            <p class="cart-success__address-content">@Model.First().Orders.Information.Sdt</p>
+                            <p class="cart-success__address-content">@Model.First().Order.Information.Sdt</p>
                         </div>
                         <div class="cart-success__address-group">
                             <label class="cart-success__address-label">Địa chỉ</label>
-                            <p class="cart-success__address-content">@Model.First().Orders.Information.Address</p>
+                            <p class="cart-success__address-content">@Model.First().Order.Information.Address</p>
                         </div>
                     </div>
                 </div>

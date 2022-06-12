@@ -1,0 +1,68 @@
+﻿@model List<BookShop.Models.CartViewModels>
+
+@{
+    int? total = 0;
+}
+
+@using System.Globalization
+
+<div class="tickid-drawer js-header-cart ">
+    <div class="cart-drawer-container js-header-cart-drawer-button">
+        <div class="cart-drawer flex v-center">
+            <svg class="tickid-svg-icon navbar__link-icon icon-shopping-cart-2" viewBox="0 0 26.6 25.6">
+                <polyline fill="none" points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1" stroke-linecap="round"
+                          stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2.5"></polyline>
+                <circle cx="10.7" cy="23" r="2.2" stroke="none"></circle>
+                <circle cx="19.7" cy="23" r="2.2" stroke="none"></circle>
+            </svg>
+            <div class="tickid-cart-number-badge js-header-cart-number-badge" style="display: block">@Model.Count</div>
+        </div>
+    </div>
+    <div class="tickid-drawer__contents tickid-drawer__contents--header-cart js-header-cart-list-content ">
+        <div class="OGgnps tickid-drawer__contents-wrapper">
+            <div class="_20qg4r v-center">Sản phẩm đã thêm</div>
+            <div class="header-with-search__cart-list-product">
+                @foreach (var item in Model)
+                {
+                    <div class="_1sUxy9 js-header-cart-item-product" data-product="8701" model="">
+                        <div class="_1bNSSj"
+                             style="background-image: url(~/Areas/Admin/Data/BookImage/@item.Book.Photo);">
+                        </div>
+                        <div class="_3V6d4p">
+                            <div class="v-center">
+                                <div class="Oo4LQk">@item.Book.Name</div>
+                                <div class="_1d_3qO"></div>
+                                <div class="_1kIptg v-center">
+                                    <div class="_2W2Ge6">@((Convert.ToDouble(item.Book.Price * (100 - item.Book.Discount) / 100)).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))</div>
+                                    <div class="_1QX3YJ">x</div>
+                                    <div class="_2Ib9-I">@item.amount</div>
+                                </div>
+                            </div>
+                            <div class="TGxoGr v-center">
+                                <div class="_1d_3qO"></div>
+                                <div class="_3dbrCy">
+                                    <button class="tickid-button-no-outline js-header-cart-btn-remove-product">Xoá</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    total += (item.Book.Price * (100 - item.Book.Discount) / 100) * item.amount;
+                }
+            </div>
+
+            <div class="header-with-search__cart-footer">
+                <div class="header-cart__info">
+                    <p class="header-cart__info-item">
+                        <span class="header-cart__info-title">Tổng số tiền:</span>
+                        <span class="header-cart__info-value">@(Convert.ToDouble(total).ToString("C0",CultureInfo.CreateSpecificCulture("vi-VN")))</span>
+                    </p>
+                </div>
+
+                <div class="Rgll-d">
+                    <div class="navbar__spacer"></div>
+                    <a href="/cart" class="btn btn-solid-primary btn--s btn--inline AbVulL">Xem giỏ hàng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

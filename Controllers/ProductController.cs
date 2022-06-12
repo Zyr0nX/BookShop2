@@ -28,18 +28,20 @@ namespace BookShop.Controllers
         [ChildActionOnly]
         public ActionResult RenderProductContent(int id)
         {
-            var model = from book in _context.Books
-                        where book.Id == id
-                        select book;
+            //var model = from book in _context.Books
+            //            where book.Id == id
+            //            select book;
+            var model = _context.Books.Find(id);
             return PartialView(model);
         }
 
         [ChildActionOnly]
         public ActionResult RenderProductDetail(int id)
         {
-            var model = from book in _context.Books
-                        where book.Id == id
-                        select book;
+            //var model = from book in _context.Books
+            //            where book.Id == id
+            //            select book;
+            var model = _context.Books.Find(id);
             return PartialView(model);
         }
     }

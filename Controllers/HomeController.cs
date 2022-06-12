@@ -54,24 +54,38 @@ namespace BookShop.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult RenderCategoryContent()
+        public ActionResult RenderCategoryContent(int? id = null)
         {
-            var model = _context.Books.OrderByDescending(book => book.Id).ToList();
+            var model = _context.Books
+                .Where(book => book.IdCategory == id)
+                .OrderByDescending(book => book.Id).ToList();
             return PartialView(model);
         }
 
-        public ActionResult About()
+        [ChildActionOnly]
+        public ActionResult _RenderCart()
         {
-            ViewBag.Message = "Your application description page.";
+            var cart = Session["CartSession"];
+            var list = new List<CartViewModels>();
+            if (cart != null)
+            {
+                list = (List<CartViewModels>)cart;
+            }
+            return PartialView(list);
+        }
 
+        public ActionResult Search()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        [ChildActionOnly]
+        public ActionResult RenderSearchResult(string s)
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            var model = from x in _context.Books
+                        where x.Name.Contains(s)
+                        select x;
+            return View(model);
         }
     }
 }

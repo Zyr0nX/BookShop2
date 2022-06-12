@@ -1,9 +1,7 @@
-﻿@model IEnumerable<BookShop.Models.Book>
+﻿@model BookShop.Models.Book
 
 @using System.Globalization
 
-@foreach (var item in Model)
-{
     <div class="product-detail product-details" id="product-details">
         <div class="_2C2YFD product-details__item">
             <div class="kP-bM3 product-details__item-title">CHI TIẾT SẢN PHẨM</div>
@@ -11,15 +9,15 @@
                 <div class="kIo6pj">
                     <label class="_1ymsZN">Danh Mục</label>
                     <div class="flex items-center _1z1CEl">
-                        @*<a class="JFOy4z _20XOUy"
-                            href="/danh-muc/@item.Category.Name?id=@item.Category.Id">@item.Category.Name</a>*@
+                        <a class="JFOy4z _20XOUy"
+                           href="/danh-muc/@Model.Category.Name?id=@Model.Category.Id">@Model.Category.Name</a>
                     </div>
                 </div>
                 <div class="kIo6pj">
                     <label class="_1ymsZN">Tác giả</label>
                     <div class="flex items-center _1z1CEl">
                         <a class="JFOy4z _20XOUy"
-                            href="#">@*@item.Author.Name*@</a>
+                           href="#">@Model.Author.Name</a>
                     </div>
                 </div>
             </div>
@@ -29,7 +27,7 @@
             <div class="_2aZyWI product-details__item-content product__details__item_content__mobile">
                 <div class="_2u0jt9 wysiwyg">
                     <p>
-                        @item.Description
+                        @Model.Description
                     </p>
                 </div>
             </div>

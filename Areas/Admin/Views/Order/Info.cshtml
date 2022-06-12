@@ -1,4 +1,4 @@
-﻿@model BookShop.Models.Orders
+﻿@model BookShop.Models.Order
 @using BookShop.Areas.Admin.Dao
 @{
     ViewBag.Title = "Info";
@@ -88,7 +88,7 @@
                                             style = "display:none;";
                                         }
                                     }
-                                    @foreach (var item in Model.DetailOrder)
+                                    @foreach (var item in Model.DetailOrders)
                                     {
                                         
                                         <tr>
@@ -133,7 +133,14 @@
                                     </tr>
                                     <tr>
                                         <th>Voucher:</th>
-                                        <td>@Model.Voucher.Name - @Model.Voucher.Discount%</td>
+                                        @if (Model.Voucher == null)
+                                        {
+                                            <td>Không</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@Model.Voucher.Name - @Model.Voucher.Discount%</td>
+                                        }
                                     </tr>
                                     <tr>
                                         <th>Tổng tiền:</th>

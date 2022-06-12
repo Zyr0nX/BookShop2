@@ -43,6 +43,9 @@
                                         @Html.DisplayNameFor(model => model.OrderDate)
                                     </th>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.ReceiveDate)
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.TotalPrice)
                                     </th>
                                     <th>
@@ -79,6 +82,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.OrderDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ReceiveDate)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TotalPrice)

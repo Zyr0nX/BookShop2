@@ -5,15 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>Mỹ Phẩm Ohui - LG Vina</title>
+    <title>Web bán sách</title>
     <meta http-equiv="REFRESH" content="1800" />
     <meta name="description" content="63 Lê Văn Lương, Trung Hòa, Cầu Giấy, Hà Nội" />
     <link rel="icon" href="../img.abaha.vn/photos/resized/40x40/83-1574737287-myphamohui-lgvina.png" />
 
     <!-- FACEBOOK OPEN GRAPH -->
     <meta property="fb:app_id" content="2794644853896597" />
-    <meta property="og:title" content="Mỹ Phẩm Ohui - LG Vina" />
-    <meta property="og:site_name" content="Mỹ Phẩm Ohui - LG Vina" />
+    <meta property="og:title" content="Web Bán sách" />
+    <meta property="og:site_name" content="Web Bán sách" />
     <meta property="og:url" content="index.html" />
     <meta property="og:description" content="63 Lê Văn Lương, Trung Hòa, Cầu Giấy, Hà Nội" />
     <meta property="og:rich_attachment" content="true" />
@@ -89,392 +89,55 @@
                 <div class="tickid-top container-wrapper js-header">
                     <div class="navbar-wrapper container-wrapper header__top js-header-top">
                         <div class="container navbar">
-                            <div class="flex v-center QFNh9Y header__top-navbar--left">
-                                <div class="_3yPx2v header__top-gotoapp">
-                                    <div class="tickid-drawer ">
-                                        Vào cửa hàng trên ứng dụng Mỹ Phẩm Ohui - LG Vina <div class="tickid-drawer__contents" style="transition-delay: 0.2s; left: 0px;">
-                                            <div class="navbar__qr">
-                                                <a href="http://hyperurl.co/myohui">
-                                                    <img src="https://img.tickid.vn/photos/qrcode_base64/aHR0cDovL2h5cGVydXJsLmNvL215b2h1aQ"
-                                                         alt="download_qr_code" class="navbar__qr-img">
-                                                    <div class="navbar__qr-stores">
-                                                        <img class="navbar__qr-store"
-                                                             src="assets/images/icons/02b83d7c975e2830effa5fdf2045095c.png"
-                                                             alt="Play Store">
-                                                        <img class="navbar__qr-store"
-                                                             src="assets/images/icons/f014ef6b544459bf2463167d3226851f.png"
-                                                             alt="App Store">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="flex _3yPx2v _1_jwND header__top-phone">
-                                    <a href="tel:0965866851" class="navbar__header-phone">
-                                        <img class="img"
-                                             src="assets/images/telephone.png"> 0965866851
-                                    </a>
-                                </div>
-                                <div class="flex _3yPx2v _1_jwND header__top-mail">
-                                    <a href="mailto:ohuivina.com@gmail.com" target="_blank"
-                                       class="navbar__header-mail">
-                                        <img class="img" src="assets/images/envelope.png">
-                                        ohuivina.com@gmail.com
-                                    </a>
-                                </div>
-                            </div>
                             <div class="navbar__spacer header__top-navbar__spacer"></div>
                             <ul class="navbar__links">
-                                <li class="navbar__link--notification navbar__link navbar__link--hoverable navbar__link--tappable">
-                                    <div class="stardust-popover popover js-popover">
-                                        <div class="stardust-popover__target js-popover-toggle">
-                                            <a class="_1PcKuZ" href="tin-tuc.html">
-                                                <svg class="tickid-svg-icon icon-notification-2" viewBox="3 2.5 14 14"
-                                                     x="0" y="0">
-                                                    <path d="m17 15.6-.6-1.2-.6-1.2v-7.3c0-.2 0-.4-.1-.6-.3-1.2-1.4-2.2-2.7-2.2h-1c-.3-.7-1.1-1.2-2.1-1.2s-1.8.5-2.1 1.3h-.8c-1.5 0-2.8 1.2-2.8 2.7v7.2l-1.2 2.5-.2.4h14.4zm-12.2-.8.1-.2.5-1v-.1-7.6c0-.8.7-1.5 1.5-1.5h6.1c.8 0 1.5.7 1.5 1.5v7.5.1l.6 1.2h-10.3z">
-                                                    </path>
-                                                    <path d="m10 18c1 0 1.9-.6 2.3-1.4h-4.6c.4.9 1.3 1.4 2.3 1.4z">
-                                                    </path>
-                                                </svg>
-                                                <!-- <div class="_1fDuYN _28wDUe _3wDwWs navbar__link-badge-number">1</div> -->
-                                                <span class="iMlhAT fw500">Tin tức</span>
-                                            </a>
-                                        </div>
-                                        <div role="tooltip" aria-hidden="false"
-                                             class="stardust-popover__popover stardust-popover__popover--border popover-content js-popover-content"
-                                             style="right: 0px; transform-origin: 362.75px top;">
-                                            <div class="stardust-popover__arrow"
-                                                 style="top: 1px; left: 362.75px; transform: translate(-50%, -100%); border-bottom: 10px solid rgba(0, 0, 0, 0.09); border-left: 0px solid transparent; border-right: 0px solid transparent;">
-                                                <div class="stardust-popover__arrow--inner"
-                                                     style="border-bottom: 10px solid rgb(255, 255, 255); border-left: 14px solid transparent; border-right: 14px solid transparent; bottom: -10px;">
+                                @if (Session["USER_SESSION"] == null)
+                                {
+                                    <li class="navbar__link navbar__link--tappable navbar__link--hoverable navbar__link-text navbar__link-text--medium">
+                                        <a href="/Customers/Register" class="link js-register-link">Đăng ký</a>
+                                    </li>
+                                    <li class="navbar__link navbar__link--separator">
+                                        <div class="navbar__link-separator"></div>
+                                    </li>
+                                    <li class="navbar__link navbar__link--tappable navbar__link--hoverable navbar__link-text navbar__link-text--medium">
+                                        <a href="/Customers/Login" class="link js-login-link">Đăng nhập</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="navbar__link navbar__link--tappable navbar__display navbar__link--hoverable navbar__link--account navbar__link--hovering">
+                                        <div class="tickid-drawer ">
+                                            <div class="navbar__link--account__container">
+                                                <div class="navbar__link-text navbar__link-text--normal-case">@Session["USERNAME"]</div>
+                                            </div>
+                                            <div class="tickid-drawer__contents" style="right: 0px;">
+                                                <div class="navbar-account-drawer__content">
+                                                    <a class="navbar-account-drawer__button" href="/user/profile">Tài khoản của tôi</a>
+                                                    <a class="navbar-account-drawer__button" href="/user/purchase">Đơn mua</a>
+                                                    <a href="/Customers/Logout" class="navbar-account-drawer__button navbar-account-drawer__button--complement">Đăng xuất</a>
                                                 </div>
                                             </div>
-                                            <div class="_2Jql4A">
-                                                <div class="_2qpmpS">Tin tức mới nhất</div>
-                                                <div>
-                                                    <a href="tin-tuc/thong-bao-thay-doi-tem-nhan.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1620531472-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">THÔNG BÁO THAY ĐỔI TEM NHÃN</div>
-                                                                <div class="_1rVAuL notification-short-content"></div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/cong-bo-san-pham-moi-ohui-thang-1-nam.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1618807421-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    Công bố sản phẩm mới Ohui tháng 1
-                                                                    năm 2021
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content"></div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/sieu-pham-moi-kem-nen-dang-thoi-ohui-ultimate-cover-stick-foundation.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1611317370-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    SIÊU PHẨM MỚI: KEM NỀN DẠNG THỎI
-                                                                    OHUI ULTIMATE COVER STICK FOUNDATION
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content"></div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/chuong-trinh-khach-hang-than-thiet.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/121-1608210033-demoweb.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    Chương trình khách hàng thân thiết
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content">
-                                                                    Để cảm
-                                                                    ơn sự ủng hộ và yêu thích của khách hàng đối với
-                                                                    chúng tôi, chương trình Khách Hàng Thân Thiết đã
-                                                                    được ra đời.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/tang-ngay-combo-5-goi-mat-na-thai-doc-sum37.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1595936336-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    Tặng ngay combo 5 gói mặt nạ thải
-                                                                    độc Su:m37
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content">
-                                                                    Khuyến
-                                                                    mại siêu hot:
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/day-shield-perfect-sun-cho-nang-tho-tu-tin-toa-nang.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1590399520-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    Day Shield Perfect Sun - Cho nàng
-                                                                    thơ tự tin "tỏa nắng"
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content"></div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/cham-soc-khong-quen-chong-nang.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1589960426-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    CHĂM SÓC KHÔNG QUÊN CHỐNG NẮNG
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content">
-                                                                    Kem
-                                                                    Chống nắng Whoo Gongjinhyang Soo.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/da-dau-co-can-duong-am.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1589966184-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">DA DẦU CÓ CẦN DƯỠNG ẨM?</div>
-                                                                <div class="_1rVAuL notification-short-content">
-                                                                    Whoo
-                                                                    Gongjinhyang Soo
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/khoi-dau-cua-lan-da-khoe-dep.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1589963137-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">KHỞI ĐẦU CỦA LÀN DA KHỎE ĐẸP</div>
-                                                                <div class="_1rVAuL notification-short-content">
-                                                                    Ohui
-                                                                    Prime Advancer
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <a href="tin-tuc/mini-game-choi-ngay-rinh-qua-lien-tay.html">
-                                                        <div class="oCaWVh _15YGwU _3hlXx2">
-                                                            <div class="_38P8sV F8NCl2">
-                                                                <div class="_3ZDC1p _3TL7ad">
-                                                                    <div class="_3TL7ad _3XaILN"
-                                                                         style="background-image: url(../img.abaha.vn/photos/resized/200x120/83-1589349012-myphamohui-lgvina.png); background-size: contain; background-repeat: no-repeat;">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="_1ocGeJ _2eerWu">
-                                                                <div class="_3aIzgc ">
-                                                                    MINI GAME - CHƠI NGAY RINH QUÀ
-                                                                    LIỀN TAY
-                                                                </div>
-                                                                <div class="_1rVAuL notification-short-content">
-                                                                    Mini
-                                                                    game
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <a class="_3la0KW" href="tin-tuc.html">Xem tất cả</a>
-                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li class="navbar__link navbar__link--tappable navbar__link--hoverable">
-                                    <a class="_1PcKuZ" href="tin-tuc/trung-tam-tro-giup.html">
-                                        <div class="navbar__help-center-icon">
-                                            <svg class="tickid-svg-icon icon-help-center" height="16"
-                                                 viewBox="0 0 16 16" width="16">
-                                                <g fill="none" fill-rule="evenodd" transform="translate(1)">
-                                                    <circle cx="7" cy="8" r="7" stroke="currentColor"></circle>
-                                                    <path fill="currentColor"
-                                                          d="m6.871 3.992c-.814 0-1.452.231-1.914.704-.462.462-.693 1.089-.693 1.892h1.155c0-.484.099-.858.297-1.122.22-.319.583-.473 1.078-.473.396 0 .715.11.935.33.209.22.319.517.319.902 0 .286-.11.55-.308.803l-.187.209c-.682.605-1.1 1.056-1.243 1.364-.154.286-.22.638-.22 1.045v.187h1.177v-.187c0-.264.055-.506.176-.726.099-.198.253-.396.462-.572.517-.451.825-.737.924-.858.275-.352.418-.803.418-1.342 0-.66-.22-1.188-.66-1.573-.44-.396-1.012-.583-1.716-.583zm-.198 6.435c-.22 0-.418.066-.572.22-.154.143-.231.33-.231.561 0 .22.077.407.231.561s.352.231.572.231.418-.077.572-.22c.154-.154.242-.341.242-.572s-.077-.418-.231-.561c-.154-.154-.352-.22-.583-.22z">
-                                                    </path>
-                                                </g>
-                                            </svg>
-                                            <span class="navbar__link-text navbar__link--tappable navbar__link--hoverable fw500">
-                                                Liên
-                                                hệ
-                                            </span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="navbar__link navbar__link--tappable navbar__link--hoverable navbar__link-text navbar__link-text--medium">
-                                    <a href="auth/login.html" class="link js-register-link">Đăng ký</a>
-                                </li>
-                                <li class="navbar__link navbar__link--separator">
-                                    <div class="navbar__link-separator"></div>
-                                </li>
-                                <li class="navbar__link navbar__link--tappable navbar__link--hoverable navbar__link-text navbar__link-text--medium">
-                                    <a href="auth/login.html" class="link js-login-link">Đăng nhập</a>
-                                </li>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>
                     <div class="container-wrapper header-with-search-wrapper">
                         <div class="container header-with-search">
-                            <ul class="header__navbar header__navbar--mobile header__navbar--left">
-                                <li class="header__navbar-link">
-                                    <a href="#" class="icon-search js-toggle-header-menu"
-                                       data-target="header-menu-categories">
-                                        <svg x="0px" y="0px" viewBox="0 0 512 512" width="32px" height="32px"
-                                             class="tickid-svg-icon">
-                                            <g>
-                                                <g>
-                                                    <g>
-                                                        <path d="M492,236H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h472c11.046,0,20-8.954,20-20S503.046,236,492,236z" />
-                                                    </g>
-                                                </g>
-                                                <g>
-                                                    <g>
-                                                        <path d="M492,76H20C8.954,76,0,84.954,0,96s8.954,20,20,20h472c11.046,0,20-8.954,20-20S503.046,76,492,76z" />
-                                                    </g>
-                                                </g>
-                                                <g>
-                                                    <g>
-                                                        <path d="M492,396H20c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h472c11.046,0,20-8.954,20-20 C512,404.954,503.046,396,492,396z" />
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li class="header__navbar-link header__navbar-link--search">
-                                    <a href="#" class="icon-search js-toggle-header-search" data-target="header-search">
-                                        <svg class="tickid-svg-icon" height="20" viewBox="0 0 20 20" width="20">
-                                            <g fill-rule="evenodd" stroke="none" stroke-width="1">
-                                                <g transform="translate(-1016 -32)">
-                                                    <g>
-                                                        <g transform="translate(405 21)">
-                                                            <g transform="translate(611 11)">
-                                                                <path d="m8 16c4.418278 0 8-3.581722 8-8s-3.581722-8-8-8-8 3.581722-8 8 3.581722 8 8 8zm0-2c-3.3137085 0-6-2.6862915-6-6s2.6862915-6 6-6 6 2.6862915 6 6-2.6862915 6-6 6z">
-                                                                </path>
-                                                                <path d="m12.2972351 13.7114222 4.9799555 4.919354c.3929077.3881263 1.0260608.3842503 1.4141871-.0086574.3881263-.3929076.3842503-1.0260607-.0086574-1.414187l-4.9799554-4.919354c-.3929077-.3881263-1.0260608-.3842503-1.4141871.0086573-.3881263.3929077-.3842503 1.0260608.0086573 1.4141871z">
-                                                                </path>
-                                                            </g>
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                            <a class="header-with-search__logo-section" href="index.html">
-                                <img src="../img.abaha.vn/photos/resized/320x/83-1574737287-myphamohui-lgvina.png"
+                            <a class="header-with-search__logo-section" href="/">
+                                <img src="https://image.similarpng.com/very-thumbnail/2020/11/Online-Shop-logo-isolated-on-transparent-PNG.png"
                                      alt="logo" />
                             </a>
                             <div class="header-with-search__search-section hidden-xs">
                                 <div class="tickid-searchbar js-searchbar">
                                     <div class="tickid-searchbar__main">
                                         <form role="search" class="tickid-searchbar-input" autocomplete="off"
-                                              action="http://demo.shop.tickid.vn/all" method="GET">
+                                              action="all" method="GET">
                                             <input aria-label="Tìm kiếm sản phẩm"
                                                    class="tickid-searchbar-input__input js-searchbar-input" maxlength="128"
                                                    placeholder="Tìm kiếm..." autocomplete="off" value="" name="s">
                                         </form>
-                                        <div class="tickid-searchbar-selector js-searchbar-selector">
-                                            <div class="tickid-drawer js-select">
-                                                <div class="tickid-searchbar-selector__selected js-current">
-                                                    <div class="tickid-searchbar-selector__selected-label js-current-label">
-                                                        Cửa hàng
-                                                    </div>
-                                                    <svg class="tickid-svg-icon icon-arrow-down"
-                                                         enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0"
-                                                         y="0">
-                                                        <g>
-                                                            <path d="m11 2.5c0 .1 0 .2-.1.3l-5 6c-.1.1-.3.2-.4.2s-.3-.1-.4-.2l-5-6c-.2-.2-.1-.5.1-.7s.5-.1.7.1l4.6 5.5 4.6-5.5c.2-.2.5-.2.7-.1.1.1.2.3.2.4z">
-                                                            </path>
-                                                        </g>
-                                                    </svg>
-                                                </div>
-                                                <div class="tickid-drawer__contents" style="right: 0px;">
-                                                    <div class="tickid-searchbar-selector__options js-options">
-                                                        <div class="tickid-searchbar-selector__option js-option active">
-                                                            <div class="tickid-searchbar-selector__option-label js-option-label">
-                                                                Cửa hàng
-                                                            </div>
-                                                            <svg class="tickid-svg-icon tickid-searchbar-selector__option-tick icon-tick"
-                                                                 enable-background="new 0 0 15 15" viewBox="0 0 15 15"
-                                                                 x="0" y="0">
-                                                                <g>
-                                                                    <path d="m6.5 13.6c-.2 0-.5-.1-.7-.2l-5.5-4.8c-.4-.4-.5-1-.1-1.4s1-.5 1.4-.1l4.7 4 6.8-9.4c.3-.4.9-.5 1.4-.2.4.3.5 1 .2 1.4l-7.4 10.3c-.2.2-.4.4-.7.4 0 0 0 0-.1 0z">
-                                                                    </path>
-                                                                </g>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="tickid-popover tickid-searchbar-list js-searchbar-list"
                                              style="position: absolute; top: 34px; left: 0px; z-index: 600;">
                                             <div class="tickid-searchbar-hints">
@@ -510,31 +173,7 @@
                                 </div>
                             </div>
                             <div class="header-with-search__cart-wrapper">
-                                <div class="tickid-drawer js-header-cart ">
-                                    <div class="cart-drawer-container js-header-cart-drawer-button">
-                                        <div class="cart-drawer flex v-center">
-                                            <svg class="tickid-svg-icon navbar__link-icon icon-shopping-cart-2"
-                                                 viewBox="0 0 26.6 25.6">
-                                                <polyline fill="none"
-                                                          points="2 1.7 5.5 1.7 9.6 18.3 21.2 18.3 24.6 6.1 7 6.1"
-                                                          stroke-linecap="round" stroke-linejoin="round"
-                                                          stroke-miterlimit="10" stroke-width="2.5"></polyline>
-                                                <circle cx="10.7" cy="23" r="2.2" stroke="none"></circle>
-                                                <circle cx="19.7" cy="23" r="2.2" stroke="none"></circle>
-                                            </svg>
-                                            <div class="tickid-cart-number-badge js-header-cart-number-badge"
-                                                 style="display: none"></div>
-                                        </div>
-                                    </div>
-                                    <div class="tickid-drawer__contents tickid-drawer__contents--header-cart js-header-cart-list-content ">
-                                        <div class="tickid-drawer__contents-wrapper tickid-drawer__contents-wrapper--cart-empty">
-                                            <figure class="tickid-drawer__contents-wrapper--empty__image">
-                                                <img src="assets/images/no-cart.png">
-                                            </figure>
-                                            <p class="tickid-drawer__contents-wrapper--empty__text">Chưa Có Sản Phẩm</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @{ Html.RenderAction("_RenderCart", "Home"); }
                             </div>
                             <ul class="header__navbar header__navbar--mobile">
                                 <li class="header__navbar-link">
@@ -791,7 +430,7 @@
                             <div class="tickid-searchbar js-searchbar">
                                 <div class="tickid-searchbar__main">
                                     <form role="search" class="tickid-searchbar-input" autocomplete="off"
-                                          action="http://demo.shop.tickid.vn/all" method="GET">
+                                          action="all" method="GET">
                                         <input aria-label="Tìm kiếm"
                                                class="tickid-searchbar-input__input js-searchbar-input" maxlength="128"
                                                placeholder="Tìm kiếm..." autocomplete="off" value="" name="s">
@@ -871,100 +510,8 @@
                         <hr />
                         <footer class="_3hdpJC footer mw100-lg">
                             <div class="_2KaIm4">
-                                <div class="_1cuZND footer__menu">
-                                    <div class="_2F-jVh footer__menu-content">
-                                        <div class="_1cJlGq footer__menu-column">
-                                            <div class="_3T6zcT footer__menu-column-title">Chăm sóc khách hàng</div>
-                                            <ul class="_1EeFJI footer__menu-column-list">
-                                                <li class="_2tLfDF">
-                                                    <a href="trung-tam-tro-giup.html"
-                                                       class="_2TLzdl">Trung tâm trợ giúp</a>
-                                                </li>
-                                                <li class="_2tLfDF">
-                                                    <a href="huong-dan-mua-hang.html"
-                                                       class="_2TLzdl">Hướng dẫn mua hàng</a>
-                                                </li>
-                                                <li class="_2tLfDF">
-                                                    <a href="chinh-sach-van-chuyen.html"
-                                                       class="_2TLzdl">Chính sách vận chuyển</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="_1cJlGq footer__menu-column">
-                                            <div class="_3T6zcT footer__menu-column-title">Về Chúng tôi</div>
-                                            <ul class="_1EeFJI footer__menu-column-list">
-                                                <li class="_2tLfDF">
-                                                    <a href="gioi-thieu.html" class="_2TLzdl">
-                                                        Giới thiệu
-                                                        về Mỹ Phẩm Ohui - LG Vina
-                                                    </a>
-                                                </li>
-                                                <li class="_2tLfDF">
-                                                    <a href="index.html" class="_2TLzdl">
-                                                        Chính sách
-                                                        thanh toán
-                                                    </a>
-                                                </li>
-                                                <li class="_2tLfDF">
-                                                    <a href="dieu-khoan-shop.html" class="_2TLzdl">
-                                                        Điều
-                                                        Khoản chính sách
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="_1cJlGq footer__menu-column footer__menu-column--social">
-                                            <div class="_3T6zcT footer__menu-column-title">Theo dõi chúng tôi trên</div>
-                                            <ul class="_1EeFJI footer__menu-column-list fa-ul">
-                                                <li class="_2tLfDF">
-                                                    <a target="_blank" href="https://facebook.com/MyphamOhuiLGvina"
-                                                       class="_2TLzdl">
-                                                        <span class="fa-li">
-                                                            <i class="fab fa-facebook fa-lg"></i>
-                                                        </span>Facebook
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="_1cJlGq footer__menu-column">
-                                            <div class="_3T6zcT footer__menu-column-title">
-                                                Vào cửa hàng trên ứng dụng Mỹ
-                                                Phẩm Ohui - LG Vina
-                                            </div>
-                                            <div class="mBTmjQ">
-                                                <a href="http://hyperurl.co/myohui">
-                                                    <img src="https://img.tickid.vn/photos/qrcode_base64/aHR0cDovL2h5cGVydXJsLmNvL215b2h1aQ"
-                                                         alt="download_qr_code" class="_2I3jAf">
-                                                    <div class="_1zEa4X hidden-xs">
-                                                        <img class="QCp2hs"
-                                                             src="assets/images/icons/759416b55e2bd69ecc360ee2faab7ad0.png"
-                                                             alt="App Store">
-                                                        <img class="QCp2hs"
-                                                             src="assets/images/icons/2679f513b5f9e235adf2c6c288617e7b.png"
-                                                             alt="Play Store">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="_2JVXfh footer__info">
                                     <div class="_3Yz4Xr w100-lg">
-                                        <div class="_3MSyY6 footer__info-menu-links">
-                                            <div class="NddQHI footer__info-menu-link">
-                                                <a class="_37K3M6"
-                                                   href="index.html"><span>Chính sách bảo mật</span></a>
-                                            </div>
-                                            <div class="NddQHI footer__info-menu-link">
-                                                <a class="_37K3M6"
-                                                   href="index.html"><span>Quy chế hoạt động</span></a>
-                                            </div>
-                                            <div class="NddQHI footer__info-menu-link">
-                                                <a class="_37K3M6"
-                                                   href="index.html"><span>Chính sách trả hàng và hoàn tiền</span></a>
-                                            </div>
-                                        </div>
                                         <div class="_36xOTP">
                                             <!-- <a target="_blank" rel="noopener noreferrer" href="#" class="_2GXmQ8">
                                                 <div class="footer-vn-background footer-vn-vn_registered_red-png _3Rt1cC"></div>
@@ -977,22 +524,16 @@
                                             <p style="text-align:center">
                                                 <span style="color:#555555">
                                                     <span style="font-size:18px">
-                                                        Công ty mỹ phẩm Ohui-
-                                                        LGvina
+                                                        Shop bán sách
                                                     </span>
                                                 </span>
                                             </p>
 
                                             <p style="text-align:center">
                                                 <span style="font-size:18px">
-                                                    Chi nhánh: 63 Lê
-                                                    Văn Lương, Trung Hòa, Cầu Giấy, Hà Nội
+                                                    Copyright © 2021 Đặng Hoàng Duy, Nguyễn Như Quang
                                                 </span>
                                             </p>
-                                        </div>
-                                        <div class="_2o2-Fo powered-by">
-                                            ♥ Powered by <a href="https://abaha.vn/">ABAHA.vn</a> - Nền tảng thiết kế
-                                            Web bán hàng online nhanh và chuyên nghiệp nhất
                                         </div>
                                     </div>
                                 </div>
@@ -1009,8 +550,10 @@
         </div>
     </div>
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/slick.min.js"></script>
     <script src="~/Scripts/jquery-cookie.js"></script>
     <script src="~/Scripts/mainb5b3.js?t=1620299212"></script>

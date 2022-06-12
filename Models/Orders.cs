@@ -19,8 +19,10 @@
         [StringLength(100)]
         public string Address { get; set; }
         [Display(Name = "Ngày đặt")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
         public DateTime? OrderDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm:ss}")]
         public DateTime? ReceiveDate { get; set; }
         [Display(Name = "Tổng tiền")]
         public int? TotalPrice { get; set; }

@@ -1,4 +1,6 @@
-﻿@foreach (var item in Model)
+﻿@model IEnumerable<BookShop.Models.Category>
+
+@foreach (var item in Model)
 {
     <div class="spacing">
         <div class="cat-products">
@@ -6,7 +8,7 @@
                 <div class="cat-products__inner">
                     <div class="cat-products__header">
                         <div class="cat-products__title">@item.Name</div>
-                        <a href="@item.Name-@item.Id"
+                        <a href="/danh-muc/@item.Name?id=@item.Id"
                            class="link cat-products__link">
                             Xem tất cả <svg class="tickid-svg-icon icon-arrow-right"
                                             enable-background="new 0 0 11 11" viewBox="0 0 11 11" x="0"
@@ -17,7 +19,7 @@
                         </a>
                     </div>
                     <div class="cat-products__body">
-                        @{ Html.RenderAction("RenderCategoryContent", "Home"); }
+                        @{ Html.RenderAction("RenderCategoryContent", "Home", new { id = item.Id }); }
                     </div>
                 </div>
             </div>

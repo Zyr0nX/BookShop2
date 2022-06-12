@@ -124,7 +124,15 @@
                                     </tr>
                                     <tr>
                                         <th>Voucher:</th>
-                                        <td>@Model.Voucher.Name - @Model.Voucher.Discount%</td>
+                                        @if (Model.Voucher == null)
+                                        {
+                                            <td>Không</td>
+                                        }
+                                        else
+                                        {
+                                            <td>@Model.Voucher.Name - @Model.Voucher.Discount%</td>
+                                        }
+
                                     </tr>
                                     <tr>
                                         <th>Tổng tiền:</th>

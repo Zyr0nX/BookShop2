@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace BookShop.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoriesController : Controller
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
 
@@ -20,7 +20,7 @@ namespace BookShop.Controllers
         public ActionResult RenderContent(int id)
         {
             var model = from x in _context.Books
-                        where x.IdCategory == id
+                        where x.Category.Id == id
                         select x;
             return View(model);
         }

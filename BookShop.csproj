@@ -88,6 +88,9 @@
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -191,8 +194,8 @@
     <Compile Include="Areas\Admin\ViewModels\CategoryListBoxViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TopList.cs" />
     <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\CategoryController.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -205,6 +208,10 @@
     <Compile Include="Migrations\202206091005152_cascadedelete.cs" />
     <Compile Include="Migrations\202206091005152_cascadedelete.designer.cs">
       <DependentUpon>202206091005152_cascadedelete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206120914328_formatorderdate.cs" />
+    <Compile Include="Migrations\202206120914328_formatorderdate.designer.cs">
+      <DependentUpon>202206120914328_formatorderdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -225,6 +232,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CheckoutViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModels.cs" />
+    <Compile Include="ViewModels\RegisterViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\dist\css\adminlte.css" />
@@ -4039,6 +4048,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\bundle.9894d30167e7aab7e616.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\mainb5b3.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\slick.css" />
@@ -4408,14 +4418,17 @@
     <Content Include="Views\Cart\RenderInformation.cshtml" />
     <Content Include="Views\Cart\RenderProductOrdered.cshtml" />
     <Content Include="Views\Cart\Success.cshtml" />
-    <Content Include="Views\Category\Content.cshtml" />
-    <Content Include="Views\Category\RenderContent.cshtml" />
-    <Content Include="Views\Customer\Login.cshtml" />
-    <Content Include="Views\Customer\Register.cshtml" />
+    <Content Include="Views\Categories\Content.cshtml" />
+    <Content Include="Views\Categories\RenderContent.cshtml" />
+    <Content Include="Views\Customers\Login.cshtml" />
+    <Content Include="Views\Customers\Register.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Product\RenderProductContent.cshtml" />
     <Content Include="Views\Product\RenderProductDetail.cshtml" />
+    <Content Include="Views\Shared\_RenderCart.cshtml" />
+    <Content Include="Views\Home\RenderSearchResult.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4453,6 +4466,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202206091005152_cascadedelete.resx">
       <DependentUpon>202206091005152_cascadedelete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206120914328_formatorderdate.resx">
+      <DependentUpon>202206120914328_formatorderdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
